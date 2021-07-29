@@ -53,6 +53,7 @@ config/icon="res://icon.png"
 Game="*res://global/Game.gd"
 AttackChains="*res://global/AttackChains.gd"
 DbgInfo="res://global/DbgInfo.tscn"
+Settings="*res://global/Settings.gd"
 
 [input]
 

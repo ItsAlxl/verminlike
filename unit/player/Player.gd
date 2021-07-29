@@ -1,8 +1,9 @@
 class_name Player
 extends Unit
 
-onready var camera: Camera = $Head/Pitch/Camera
-var mouse_sensitivity := 0.0009;
+onready var cam_alive: Camera = $Head/Pitch/CameraAlive
+onready var cam_dead: Camera = $Head/CameraDead;
+var mouse_sensitivity: float = Settings.get_data("mouse_sensitivity");
 
 func _ready() -> void:
 	._ready();
@@ -40,8 +41,23 @@ func _input(ev: InputEvent) -> void:
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
 
+func die():
+	.die();
+	cam_dead.current = true;
+
+func _process(delta: float) -> void:
+	if is_dead:
+		cam_dead.translate(Vector3(0, 0, 1) * delta);
+		if cam_dead.fov > 1:
+			cam_dead.fov = max(1.0, cam_dead.fov - 3 * delta);
+
+func _get_facing_2D() -> Vector2:
+	if is_dead:
+		return Vector2(0, 1).rotated(-head.rotation.y);
+	return ._get_facing_2D();
+
 func get_unstunned_movt() -> Vector3:
-	var move := Vector3.ZERO;
-	move += (Input.get_action_strength("movt_back") - Input.get_action_strength("movt_fwd")) * head.transform.basis.z;
-	move += (Input.get_action_strength("movt_right") - Input.get_action_strength("movt_left")) * head.transform.basis.x;
-	return move.normalized();
+	return vector2_to_facing(Vector2(
+		Input.get_action_strength("movt_right") - Input.get_action_strength("movt_left"),
+		Input.get_action_strength("movt_back") - Input.get_action_strength("movt_fwd")
+	)).normalized();

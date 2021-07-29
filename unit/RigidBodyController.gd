@@ -277,6 +277,11 @@ func apply_friction_modifiers(_move: Vector3) -> void:
 	if !is_grounded:
 		physics_material_override.friction = default_friction/friction_divider;
 
-# Get movement vector based on input, relative to the player's camera transform
+func vector2_to_facing(v: Vector2) -> Vector3:
+	var f := Vector3.ZERO;
+	f += v.y * head.transform.basis.z;
+	f += v.x * head.transform.basis.x;
+	return f;
+
 func get_movt_vect() -> Vector3:
 	return Vector3.ZERO;

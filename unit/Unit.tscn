@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://unit/Unit.gd" type="Script" id=1]
 [ext_resource path="res://unit/physmat_unit.tres" type="PhysicsMaterial" id=2]
@@ -173,7 +173,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=4]
 resource_name = "prepare_left"
 length = 0.25
 step = 0.025
@@ -230,7 +230,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=5]
 resource_name = "prepare_right"
 length = 0.25
 step = 0.025
@@ -287,8 +287,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "reset"
+[sub_resource type="Animation" id=6]
 length = 0.05
 step = 0.025
 tracks/0/type = "value"
@@ -344,7 +343,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 length = 0.65
 step = 0.025
 tracks/0/type = "value"
@@ -409,7 +408,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=8]
 length = 0.7
 step = 0.025
 tracks/0/type = "value"
@@ -474,7 +473,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=9]
 length = 0.5
 step = 0.025
 tracks/0/type = "value"
@@ -539,23 +538,28 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Curve" id=14]
+[sub_resource type="Curve" id=10]
 min_value = -360.0
 max_value = 360.0
 _data = [ Vector2( 0, -3.27274 ), 0.0, 0.0, 0, 0, Vector2( 0.253886, -360 ), 0.0, 0.0, 0, 0, Vector2( 1, -360 ), 0.0, 0.0, 0, 0 ]
 
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 10 )
+
+[sub_resource type="Curve" id=12]
+max_value = 100.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=13]
+curve = SubResource( 12 )
+
+[sub_resource type="Curve" id=14]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.772021, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
 [sub_resource type="CurveTexture" id=15]
 curve = SubResource( 14 )
 
-[sub_resource type="CurveTexture" id=12]
-
-[sub_resource type="Curve" id=16]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.772021, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=17]
-curve = SubResource( 16 )
-
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticlesMaterial" id=16]
 emission_shape = 1
 emission_sphere_radius = 0.2
 flag_rotate_y = true
@@ -564,17 +568,17 @@ initial_velocity = -2.0
 initial_velocity_random = 1.0
 angular_velocity = 360.0
 angular_velocity_random = 1.0
-angular_velocity_curve = SubResource( 15 )
+angular_velocity_curve = SubResource( 11 )
 damping = 5.0
 damping_random = 1.0
-damping_curve = SubResource( 12 )
+damping_curve = SubResource( 13 )
 scale = 5.0
 scale_random = 1.0
-scale_curve = SubResource( 17 )
+scale_curve = SubResource( 15 )
 hue_variation = -0.04
 hue_variation_random = 1.0
 
-[sub_resource type="SphereMesh" id=13]
+[sub_resource type="SphereMesh" id=17]
 material = ExtResource( 8 )
 radius = 0.02
 height = 0.04
@@ -624,12 +628,12 @@ playback_default_blend_time = 0.05
 anims/bash_down = SubResource( 1 )
 anims/block_end = SubResource( 2 )
 anims/block_start = SubResource( 3 )
-anims/prepare_left = SubResource( 9 )
-anims/prepare_right = SubResource( 8 )
-anims/reset = SubResource( 4 )
-anims/swipe_left = SubResource( 5 )
-anims/swipe_right = SubResource( 6 )
-anims/uppercut = SubResource( 7 )
+anims/prepare_left = SubResource( 4 )
+anims/prepare_right = SubResource( 5 )
+anims/reset = SubResource( 6 )
+anims/swipe_left = SubResource( 7 )
+anims/swipe_right = SubResource( 8 )
+anims/uppercut = SubResource( 9 )
 
 [node name="OverlapDetect" type="Area" parent="."]
 script = ExtResource( 6 )
@@ -651,8 +655,8 @@ amount = 50
 one_shot = true
 explosiveness = 0.15
 randomness = 1.0
-process_material = SubResource( 10 )
-draw_pass_1 = SubResource( 13 )
+process_material = SubResource( 16 )
+draw_pass_1 = SubResource( 17 )
 
 [connection signal="animation_finished" from="animWeps" to="." method="_on_animWeps_animation_finished"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]

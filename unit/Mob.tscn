@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://unit/Unit.tscn" type="PackedScene" id=1]
 [ext_resource path="res://unit/Mob.gd" type="Script" id=3]
+
+[sub_resource type="CylinderShape" id=1]
+radius = 15.0
 
 [node name="Mob" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -10,5 +13,18 @@ hp_max = 50.0
 [node name="wep" parent="Head/Pitch" index="0"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.604098, -0.435852, -0.496375 )
 
+[node name="AggroBubble" type="Area" parent="Head" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.753756, 0 )
+monitorable = false
+collision_layer = 0
+collision_mask = 6
+
+[node name="Col" type="CollisionShape" parent="Head/AggroBubble" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.402574, -6.44708 )
+shape = SubResource( 1 )
+
 [node name="animWeps" parent="." index="3"]
 playback_speed = 0.66
+
+[connection signal="body_entered" from="Head/AggroBubble" to="." method="_on_AggroBubble_body_entered"]
+[connection signal="body_exited" from="Head/AggroBubble" to="." method="_on_AggroBubble_body_exited"]

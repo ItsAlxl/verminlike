@@ -8,14 +8,23 @@ collision_layer = 2
 collision_mask = 23
 script = ExtResource( 2 )
 accel = 120.0
+jump = null
 air_control = 0.2
+turning_scale = null
+walkable_slope = null
 speed_limit = 4.0
+friction_divider = null
+hp_max = 1.0
 stun_on_hit = 0.0
 
-[node name="Camera" type="Camera" parent="Head/Pitch" index="0"]
+[node name="CameraAlive" type="Camera" parent="Head/Pitch" index="0"]
+current = true
 fov = 75.0
 near = 0.33
-far = 25000.0
 
 [node name="wep" parent="Head/Pitch" index="1"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.604098, -0.435852, -0.496375 )
+
+[node name="CameraDead" type="Camera" parent="Head" index="1"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.07879, -2.22892 )
+fov = 80.0

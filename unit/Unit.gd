@@ -36,6 +36,9 @@ func get_wep():
 	return $Head/Pitch/wep;
 
 func _ready() -> void:
+	head.rotation.y = rotation.y;
+	rotation.y = 0;
+	
 	get_wep().setup(self);
 	set_lpc_anim("IDLE");
 	hp_now = hp_max;
@@ -105,6 +108,8 @@ func release_melee_attack() -> void:
 			
 			LPCLeader.apex_swipe_anim();
 			var attack_anim: String = get_wep().get_next_atk_anim(current_chain_anim, next_atk_mode);
+			next_atk_mode = "";
+			
 			next_prepare = get_wep().get_anim_ending_side(attack_anim);
 			get_wep().set_current_atk(attack_anim);
 			WepAnims.play(attack_anim);
@@ -141,11 +146,13 @@ func end_block() -> void:
 
 func _get_facing_2D() -> Vector2:
 	return Vector2(0, -1).rotated(-head.rotation.y);
+func _get_facing_transl() -> Vector3:
+	return translation;
 func get_arc_dot(u: Unit) -> float:
-	var dir := u.translation - translation;
+	var dir := u.translation - _get_facing_transl();
 	return _get_facing_2D().dot(Vector2(dir.x, dir.z).normalized());
 func get_arc_cross(u: Unit) -> float:
-	var dir := u.translation - translation;
+	var dir := u.translation - _get_facing_transl();
 	return _get_facing_2D().cross(Vector2(dir.x, dir.z).normalized());
 
 const BASE_COUNTER_STUN := 2.0;

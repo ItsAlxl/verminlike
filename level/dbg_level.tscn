@@ -26,10 +26,14 @@ mesh = SubResource( 2 )
 material/0 = null
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63441, 11.3474 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63441, 23.9549 )
+jump = 5.0
+turning_scale = 45.0
+walkable_slope = 0.35
+friction_divider = 15.0
 
 [node name="Mob" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.336804, 2.76266, -5.22348 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.336804, 8.98369, -5.22348 )
 
 [node name="Mob2" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15578, 2.76266, -9.20475 )
