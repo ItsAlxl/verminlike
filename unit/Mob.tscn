@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://unit/Unit.tscn" type="PackedScene" id=1]
+[ext_resource path="res://unit/Mob.gd" type="Script" id=3]
+
+[node name="Mob" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+hp_max = 50.0
+
+[node name="wep" parent="Head/Pitch" index="0"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.604098, -0.435852, -0.496375 )
+
+[node name="animWeps" parent="." index="3"]
+playback_speed = 0.66

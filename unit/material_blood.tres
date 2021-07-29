@@ -1,0 +1,13 @@
+[gd_resource type="SpatialMaterial" load_steps=3 format=2]
+
+[sub_resource type="OpenSimplexNoise" id=11]
+
+[sub_resource type="NoiseTexture" id=12]
+seamless = true
+noise = SubResource( 11 )
+
+[resource]
+vertex_color_use_as_albedo = true
+albedo_color = Color( 0.788235, 0, 0, 1 )
+albedo_texture = SubResource( 12 )
+roughness = 0.5
