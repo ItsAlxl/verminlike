@@ -45,8 +45,8 @@ func set_current_atk(ca: String) -> void:
 	current_attack = ca;
 
 func _on_Oucher_body_entered(body: PhysicsBody):
-	if body.has_method("take_melee_dmg"):
-		body.take_melee_dmg(dmg, knockback, unit_owner, AttackChains.get_attack_extras(attack_chain, current_attack));
+	if body.has_method("take_atk"):
+		body.take_atk(dmg, knockback, unit_owner, AttackChains.get_attack_extras(attack_chain, current_attack));
 
 func get_next_atk_anim(atk_anim_name: String, mode: String) -> String:
 	return AttackChains.get_next_anim(attack_chain, mode, atk_anim_name);
