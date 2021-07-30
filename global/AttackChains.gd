@@ -36,5 +36,5 @@ func get_next_anim(chain: String, mode: String, anim := "") -> String:
 func get_anim_ending_side(chain: String, anim := "") -> String:
 	return _safe_get(chain, anim, "end_side", "right");
 
-func get_attack_extras(chain: String, anim := "") -> String:
+func get_attack_extras(chain: String, anim := "") -> Dictionary:
 	return _safe_get(chain, anim, "atk_extras", {});

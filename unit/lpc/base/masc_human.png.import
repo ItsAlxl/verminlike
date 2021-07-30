@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/masc_human.png-913b53fb8c48079132cae6907ad4ac47.s3tc.stex"
-path.etc2="res://.import/masc_human.png-913b53fb8c48079132cae6907ad4ac47.etc2.stex"
+path="res://.import/masc_human.png-913b53fb8c48079132cae6907ad4ac47.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://unit/lpc/base/masc_human.png"
-dest_files=[ "res://.import/masc_human.png-913b53fb8c48079132cae6907ad4ac47.s3tc.stex", "res://.import/masc_human.png-913b53fb8c48079132cae6907ad4ac47.etc2.stex" ]
+dest_files=[ "res://.import/masc_human.png-913b53fb8c48079132cae6907ad4ac47.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
