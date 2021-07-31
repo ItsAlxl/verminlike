@@ -1,12 +1,14 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://unit/Unit.gd" type="Script" id=1]
 [ext_resource path="res://unit/physmat_unit.tres" type="PhysicsMaterial" id=2]
 [ext_resource path="res://unit/lpc/base/masc_human.png" type="Texture" id=3]
+[ext_resource path="res://wep/hammer/hammer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://unit/unit_capsule_shape.tres" type="Shape" id=5]
 [ext_resource path="res://unit/OverlapDetect.gd" type="Script" id=6]
 [ext_resource path="res://unit/lpc/LPCLeader.gd" type="Script" id=7]
 [ext_resource path="res://unit/material_blood.tres" type="Material" id=8]
+[ext_resource path="res://wep/revolver/revolver.tscn" type="PackedScene" id=9]
 [ext_resource path="res://unit/wep_grip.gd" type="Script" id=10]
 
 [sub_resource type="Animation" id=1]
@@ -546,6 +548,55 @@ tracks/3/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=20]
+resource_name = "switch_weps"
+length = 0.2
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head/Pitch/wep:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.175 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.604098, -0.435852, -0.496375 ), Vector3( 0.604098, -0.693808, -0.490142 ), Vector3( 0.604098, -0.435852, -0.496375 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head/Pitch/wep:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.175 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -90, 0 ), Vector3( 5.04838e-07, -90, 11.619 ), Vector3( 0, -90, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.125 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [ false ],
+"method": "set_allow_wep_movt"
+}, {
+"args": [  ],
+"method": "_perf_wep_switch"
+}, {
+"args": [ true ],
+"method": "set_allow_wep_movt"
+} ]
+}
+
 [sub_resource type="Animation" id=11]
 length = 0.5
 step = 0.025
@@ -682,6 +733,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.753756, 0 )
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.604098, -0.435852, -0.496375 )
 script = ExtResource( 10 )
 
+[node name="DBGHammer" parent="Head/Pitch/wep" instance=ExtResource( 4 )]
+
+[node name="DBGRevolver" parent="Head/Pitch/wep" instance=ExtResource( 9 )]
+
 [node name="belt" type="Spatial" parent="Head"]
 transform = Transform( -4.37114e-08, 0, -1, 1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 1.91069e-15, -0.703766, -0.983166, 0 )
 
@@ -712,6 +767,7 @@ anims/recoil = SubResource( 7 )
 anims/reset = SubResource( 8 )
 anims/swipe_left = SubResource( 9 )
 anims/swipe_right = SubResource( 10 )
+anims/switch_weps = SubResource( 20 )
 anims/uppercut = SubResource( 11 )
 
 [node name="OverlapDetect" type="Area" parent="."]

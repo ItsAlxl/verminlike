@@ -38,6 +38,8 @@ onready var pitch: Spatial = $Head/Pitch; # x-axis rotation node (look up & down
 ### Integrate forces vars
 export var accel := 80.0; # Player acceleration force
 export var jump := 5.0; # Jump force multiplier
+export var dodge := 25.0; # Dodge impulse multiplier
+export var dodge_cd := 0.75; # Dodge cooldown
 export var air_control := 0.0; # Air control multiplier
 export var turning_scale := 45.0; # How quickly to scale movement towards a turning direction. Lower is more.
 export var walkable_slope := 0.35; # Walkable slope. Lower is steeper
@@ -54,6 +56,9 @@ var should_dejump := false;
 var is_landing := false; # Whether the player has jumped & let go of jump
 var is_jumping := false; # Whether the player has jumped
 var was_jumping := false; # Whether the player was jumping during the last physics frame
+
+var should_dodge := false;
+var dodge_cd_now := 0.0;
 
 func _physics_process(_delta: float) -> void:
 ### Groundedness raycasts
@@ -111,6 +116,10 @@ func _physics_process(_delta: float) -> void:
 		if (collision && is_slope_walkable(collision.normal.y)):
 			is_grounded = true;
 
+func _process(delta: float) -> void:
+	if dodge_cd_now > 0.0:
+		dodge_cd_now -= delta;
+
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	upper_slope_normal = Vector3.UP;
 	lower_slope_normal = Vector3.DOWN;
@@ -149,22 +158,30 @@ func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	# If the player tried to jump & is grounded, apply an upward force times the jump multiplier
 	if should_jump:
 		should_jump = false;
-		if true || (is_grounded && !is_jumping):
+		if is_grounded && !is_jumping:
 			state.apply_central_impulse(Vector3.UP * jump);
 			is_jumping = true;
 			is_landing = false;
 	# Apply a downward force once if the player lets go of jump to assist with landing
-	if (!is_grounded) && should_dejump:
+	if !is_grounded && should_dejump:
 		should_dejump = false;
-		if (is_landing == false):
+		if !is_landing:
 			state.apply_central_impulse(Vector3.DOWN * jump * 0.2);
 			is_landing = true;
-	if (is_grounded && was_jumping):
+	if is_grounded && was_jumping:
 		is_jumping = false;
 	was_jumping = is_jumping;
 
-### Movement
+### Dodging
 	var move := get_movt_vect(); # Get movement vector relative to player orientation
+	
+	if should_dodge:
+		should_dodge = false;
+		if dodge_cd_now <= 0.0:
+			dodge_cd_now = dodge_cd;
+			state.apply_central_impulse(move * dodge);
+
+### Movement
 	var move2 := Vector2(move.x, move.z); # Convert movement for Vector2 methods
 	
 	apply_friction_modifiers(move);

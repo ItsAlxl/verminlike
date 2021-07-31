@@ -43,29 +43,38 @@ func get_wep() -> Spatial:
 	return WepHand.get_child(0) as Spatial;
 
 func switch_wep():
-	if can_wep_move():
-		_queue_block = false;
-		_queue_unblock = false;
-		_queue_atk_start = false;
-		_queue_atk_release = false;
-		_queue_wep_switch = false;
-		
-		if get_wep() != null:
-			var w := get_wep();
-			WepHand.remove_child(w);
-			WepBelt.add_child(w);
-			if w.wep_type == "RANGED":
-				w.set_eyeline_adjust(false);
-		
-		var new_wep := WepBelt.get_child(0);
-		WepBelt.remove_child(new_wep);
-		WepHand.add_child(new_wep);
-		if new_wep.wep_type == "RANGED":
-			new_wep.set_eyeline_adjust(true);
-	else:
-		_queue_wep_switch = true;
+	if !blocks_preventing_attack() && !is_attacking:
+		if can_wep_move():
+			_queue_block = false;
+			_queue_unblock = false;
+			_queue_atk_start = false;
+			_queue_atk_release = false;
+			_queue_wep_switch = false;
+			
+			WepAnims.play("switch_weps");
+		else:
+			_queue_wep_switch = true;
+
+func _perf_wep_switch() -> void:
+	if get_wep() != null:
+		var w := get_wep();
+		WepHand.remove_child(w);
+		WepBelt.add_child(w);
+		if w.wep_type == "RANGED":
+			w.set_eyeline_adjust(false);
+	
+	var new_wep := WepBelt.get_child(0);
+	WepBelt.remove_child(new_wep);
+	WepHand.add_child(new_wep);
+	if new_wep.wep_type == "RANGED":
+		new_wep.set_eyeline_adjust(true);
 
 func _ready() -> void:
+	for dbg in [get_node_or_null("Head/Pitch/wep/DBGHammer"), get_node_or_null("Head/Pitch/wep/DBGRevolver")]:
+		if dbg != null:
+			dbg.get_parent().remove_child(dbg);
+			dbg.queue_free();
+	
 	head.rotation.y = rotation.y;
 	rotation.y = 0;
 	

@@ -18,11 +18,13 @@ func _input(ev: InputEvent) -> void:
 		pitch.rotation_degrees.x = clamp(pitch.rotation_degrees.x, -90, 90);
 	
 	if is_alive():
-		# Jump
+		# Movement
 		if ev.is_action_pressed("movt_jump"):
 			should_jump = true;
 		if ev.is_action_released("movt_jump"):
 			should_dejump = true;
+		if ev.is_action_pressed("dodge"):
+			should_dodge = true;
 		
 		# Weapons
 		if is_wep_ranged():

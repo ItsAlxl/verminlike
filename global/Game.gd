@@ -1,7 +1,7 @@
 extends Node
 
 var plr: Player;
-var level: RigidBody;
+var level: Spatial;
 
 func _ready() -> void:
 	randomize();
