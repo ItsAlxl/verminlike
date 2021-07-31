@@ -50,6 +50,7 @@ func switch_wep():
 			_queue_atk_start = false;
 			_queue_atk_release = false;
 			_queue_wep_switch = false;
+			reset_attack_chain();
 			
 			WepAnims.play("switch_weps");
 		else:
@@ -163,7 +164,7 @@ func _allow_atk_release() -> void:
 		release_melee_attack();
 
 func release_melee_attack() -> void:
-	if !blocks_preventing_attack():
+	if !blocks_preventing_attack() && is_attacking:
 		if _queue_atk_start:
 			_queue_atk_release = true;
 		else:
@@ -244,6 +245,7 @@ func die() -> void:
 		
 		set_lpc_anim("DEAD");
 		$ParticlesBleed.emitting = true;
+		$CleanUp.play("cleanup");
 		
 		WepAnims.play("reset");
 		WepHand.visible = false;

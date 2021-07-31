@@ -21,7 +21,7 @@ var chains := {
 		},
 		"bash_down": {
 			"atk_extras": {
-				"dmg": 20,
+				"dmg": 15,
 			},
 		},
 	},

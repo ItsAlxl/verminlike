@@ -38,7 +38,7 @@ onready var pitch: Spatial = $Head/Pitch; # x-axis rotation node (look up & down
 ### Integrate forces vars
 export var accel := 80.0; # Player acceleration force
 export var jump := 5.0; # Jump force multiplier
-export var dodge := 25.0; # Dodge impulse multiplier
+export var dodge := 50.0; # Dodge impulse multiplier
 export var dodge_cd := 0.75; # Dodge cooldown
 export var air_control := 0.0; # Air control multiplier
 export var turning_scale := 45.0; # How quickly to scale movement towards a turning direction. Lower is more.

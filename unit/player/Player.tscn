@@ -13,7 +13,7 @@ accel = 120.0
 dodge = 5.0
 air_control = 0.2
 speed_limit = 4.0
-hp_max = 1.0
+hp_max = 125.0
 stun_on_hit = 0.0
 
 [node name="CameraAlive" type="Camera" parent="Head/Pitch" index="0"]

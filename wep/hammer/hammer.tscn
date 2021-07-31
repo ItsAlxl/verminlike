@@ -14,7 +14,7 @@ extents = Vector3( 0.300082, 0.163928, 0.140098 )
 
 [node name="Hammer" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-dmg = 15.0
+dmg = 10.0
 knockback = Vector2( 6, 2 )
 attack_chain = "hammer"
 

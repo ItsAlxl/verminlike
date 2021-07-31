@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://unit/Unit.gd" type="Script" id=1]
 [ext_resource path="res://unit/physmat_unit.tres" type="PhysicsMaterial" id=2]
@@ -548,7 +548,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=11]
 resource_name = "switch_weps"
 length = 0.2
 step = 0.025
@@ -597,7 +597,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.5
 step = 0.025
 tracks/0/type = "value"
@@ -662,28 +662,28 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Curve" id=12]
+[sub_resource type="Curve" id=13]
 min_value = -360.0
 max_value = 360.0
 _data = [ Vector2( 0, -3.27274 ), 0.0, 0.0, 0, 0, Vector2( 0.253886, -360 ), 0.0, 0.0, 0, 0, Vector2( 1, -360 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=13]
-curve = SubResource( 12 )
+[sub_resource type="CurveTexture" id=14]
+curve = SubResource( 13 )
 
-[sub_resource type="Curve" id=14]
+[sub_resource type="Curve" id=15]
 max_value = 100.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=15]
-curve = SubResource( 14 )
+[sub_resource type="CurveTexture" id=16]
+curve = SubResource( 15 )
 
-[sub_resource type="Curve" id=16]
+[sub_resource type="Curve" id=17]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.772021, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=17]
-curve = SubResource( 16 )
+[sub_resource type="CurveTexture" id=18]
+curve = SubResource( 17 )
 
-[sub_resource type="ParticlesMaterial" id=18]
+[sub_resource type="ParticlesMaterial" id=19]
 emission_shape = 1
 emission_sphere_radius = 0.2
 flag_rotate_y = true
@@ -692,22 +692,65 @@ initial_velocity = -2.0
 initial_velocity_random = 1.0
 angular_velocity = 360.0
 angular_velocity_random = 1.0
-angular_velocity_curve = SubResource( 13 )
+angular_velocity_curve = SubResource( 14 )
 damping = 5.0
 damping_random = 1.0
-damping_curve = SubResource( 15 )
+damping_curve = SubResource( 16 )
 scale = 5.0
 scale_random = 1.0
-scale_curve = SubResource( 17 )
+scale_curve = SubResource( 18 )
 hue_variation = -0.04
 hue_variation_random = 1.0
 
-[sub_resource type="SphereMesh" id=19]
+[sub_resource type="SphereMesh" id=20]
 material = ExtResource( 8 )
 radius = 0.02
 height = 0.04
 radial_segments = 8
 rings = 8
+
+[sub_resource type="Animation" id=21]
+resource_name = "cleanup"
+length = 60.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("LPCLeader/Base:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 55, 60 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -50 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LPCLeader/Base:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 55, 60 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 60 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
 
 [node name="Unit" type="RigidBody"]
 collision_layer = 4
@@ -745,6 +788,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.249311, 0 )
 script = ExtResource( 7 )
 
 [node name="Base" type="Sprite3D" parent="LPCLeader"]
+offset = Vector2( 0, -50 )
+modulate = Color( 1, 1, 1, 0 )
 pixel_size = 0.05
 billboard = 2
 shaded = true
@@ -767,8 +812,8 @@ anims/recoil = SubResource( 7 )
 anims/reset = SubResource( 8 )
 anims/swipe_left = SubResource( 9 )
 anims/swipe_right = SubResource( 10 )
-anims/switch_weps = SubResource( 20 )
-anims/uppercut = SubResource( 11 )
+anims/switch_weps = SubResource( 11 )
+anims/uppercut = SubResource( 12 )
 
 [node name="OverlapDetect" type="Area" parent="."]
 script = ExtResource( 6 )
@@ -790,8 +835,11 @@ amount = 50
 one_shot = true
 explosiveness = 0.15
 randomness = 1.0
-process_material = SubResource( 18 )
-draw_pass_1 = SubResource( 19 )
+process_material = SubResource( 19 )
+draw_pass_1 = SubResource( 20 )
+
+[node name="CleanUp" type="AnimationPlayer" parent="."]
+anims/cleanup = SubResource( 21 )
 
 [connection signal="animation_finished" from="animWeps" to="." method="_on_animWeps_animation_finished"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
