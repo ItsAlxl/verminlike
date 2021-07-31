@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/revolver_reload2.ogg-a7ee318ce56b0b6ce689c74365c6e227.oggstr"
+
+[deps]
+
+source_file="res://wep/sounds/revolver_reload2.ogg"
+dest_files=[ "res://.import/revolver_reload2.ogg-a7ee318ce56b0b6ce689c74365c6e227.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

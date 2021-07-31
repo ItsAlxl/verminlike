@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/deep_smack.ogg-35e1c212522ccb446cf83690ecf2995b.oggstr"
+
+[deps]
+
+source_file="res://wep/sounds/deep_smack.ogg"
+dest_files=[ "res://.import/deep_smack.ogg-35e1c212522ccb446cf83690ecf2995b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

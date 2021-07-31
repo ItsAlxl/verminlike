@@ -55,9 +55,6 @@ var is_landing := false; # Whether the player has jumped & let go of jump
 var is_jumping := false; # Whether the player has jumped
 var was_jumping := false; # Whether the player was jumping during the last physics frame
 
-func _ready() -> void:
-	$Head/Pitch/wep.setup(self);
-
 func _physics_process(_delta: float) -> void:
 ### Groundedness raycasts
 	# Define raycast info used with detecting groundedness

@@ -1,34 +1,127 @@
-extends Spatial
+class_name RangedWeapon
+extends Weapon
 
-onready var ShootRay := $ShootRay;
+onready var AudioDry = $AudioDry;
+onready var AudioReload = $AudioReload;
+onready var AudioReloadDone = $AudioReloadDone;
 
-export var dmg := 0.0;
-export var knockback := Vector2(0.0, 0.0);
-export var cone := Vector2(0.0, 0.0);
-export var max_dist := 10.0;
-export var fire_cd := 1.2;
-export var mag_size := 6;
+export var spread := Vector2(0.0, 0.0);
+export var fire_cd := 0.1;
+export var mag_size := 600;
 export var reload_amt := 1;
-export var reload_time := 0.5;
+export var reload_time := 0.25;
+export var max_hits := 1;
+export var atk_extras := {};
 
-var unit_owner: Unit = null;
 var ammo_now := -1;
 
-func setup(uown: Unit) -> void:
-	unit_owner = uown;
-	set_plr_controlled(uown is Player);
+var fire_cd_now := 0.0;
+var reload_time_now := 0.0;
+var _fire_frame := false;
+
+var targs := [];
+
+onready var muzzle_transl := HitArea.translation;
+var eyeline_adjusted := false;
+
+func _init() -> void:
+	wep_type = "RANGED";
+
+func _ready() -> void:
 	ammo_now = mag_size;
 
-var is_plr_wep := true setget set_plr_controlled;
-func set_plr_controlled(pc: bool) -> void:
-	is_plr_wep = pc;
-	if pc:
-		ShootRay.collision_mask = 0b101;
-	else:
-		ShootRay.collision_mask = 0b11;
+func setup(uown: Unit) -> void:
+	.setup(uown);
+	report_ammo_to_hud();
 
-func fire() -> void:
-	var spread_x := rand_range(-cone.x, cone.x);
-	var spread_y := rand_range(-cone.y, cone.y);
-	ShootRay.cast_to = Vector3(max_dist, spread_y, spread_x);
-	ShootRay.force_raycast_update();
+func _physics_process(delta: float) -> void:
+	if fire_cd_now > 0:
+		fire_cd_now -= delta;
+	if reload_time_now > 0:
+		reload_time_now -= delta;
+	
+	if _fire_frame:
+		_fire_frame = false;
+		
+		var hit_units := [];
+		var num_hits = targs.size();
+		if max_hits > -1:
+			num_hits = min(max_hits, num_hits);
+		for i in range(num_hits):
+			_insort_hit(hit_units, {
+				"unit": targs[i],
+				"dist_sq": (targs[i].translation - unit_owner.translation).length_squared(),
+			});
+		
+		for h in hit_units:
+			atk_unit(h.unit);
+
+func set_hits_active(_a: bool) -> void:
+	pass;
+
+func report_ammo_to_hud() -> void:
+	if unit_owner == Game.plr:
+		HUD.take_ammo(ammo_now, mag_size);
+
+func fire() -> int:
+	if ammo_now > 0:
+		if fire_cd_now <= 0:
+			_fire_frame = true;
+			ammo_now -= 1;
+			report_ammo_to_hud();
+			
+			fire_cd_now = fire_cd;
+			AudioHit.play();
+			return 0;
+	else:
+		AudioDry.play();
+		return 1;
+	return 2;
+
+func reload() -> bool:
+	if reload_time_now <= 0:
+		reload_time_now = reload_time;
+		if ammo_now < mag_size:
+			ammo_now = min(ammo_now + reload_amt, mag_size);
+			AudioReload.play();
+			report_ammo_to_hud();
+		else:
+			AudioReloadDone.play();
+		return true;
+	return false;
+
+func set_eyeline_adjust(a: bool) -> void:
+	if a:
+		remove_child(HitArea);
+		unit_owner.pitch.add_child(HitArea);
+		HitArea.translation = Vector3.ZERO;
+		HitArea.rotation.y = -PI / 2;
+	else:
+		unit_owner.pitch.remove_child(HitArea);
+		add_child(HitArea);
+		HitArea.translation = muzzle_transl;
+		HitArea.rotation.y = 0;
+	eyeline_adjusted = a;
+
+func _on_HitArea_body_entered(body: PhysicsBody) -> void:
+	if body.has_method("take_atk"):
+		targs.append(body);
+func _on_HitArea_body_exited(body: PhysicsBody) -> void:
+	if body.has_method("take_atk"):
+		targs.erase(body);
+
+func _insort_hit(into: Array, elm: Dictionary) -> void:
+	var low := 0;
+	var high := into.size();
+	while low < high:
+		var mid: int = (low + high) / 2;
+		if into[mid].get("dist_sq") < elm.get("dist_sq"):
+			low = mid + 1;
+		else:
+			high = mid;
+	into.insert(low, elm);
+
+func get_atk_extras() -> Dictionary:
+	return atk_extras;
+
+

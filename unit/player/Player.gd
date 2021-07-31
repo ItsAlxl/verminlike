@@ -6,33 +6,43 @@ onready var cam_dead: Camera = $Head/CameraDead;
 var mouse_sensitivity: float = Settings.get_data("mouse_sensitivity");
 
 func _ready() -> void:
-	._ready();
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
 	Game.plr = self;
+	._ready();
 
 func _input(ev: InputEvent) -> void:
-	# Player look
+	# Look
 	if ev is InputEventMouseMotion && Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		head.rotate_y(-ev.relative.x * mouse_sensitivity);
 		pitch.rotate_x(-ev.relative.y * mouse_sensitivity);
 		pitch.rotation_degrees.x = clamp(pitch.rotation_degrees.x, -90, 90);
 	
-	# Jump
-	if ev.is_action_pressed("movt_jump"):
-		should_jump = true;
-	if ev.is_action_released("movt_jump"):
-		should_dejump = true;
-	
-	# Attack / block
-	if ev.is_action_pressed("atk_primary"):
-		start_melee_attack();
-	if ev.is_action_released("atk_primary"):
-		release_melee_attack();
-	
-	if ev.is_action_pressed("block"):
-		start_block();
-	if ev.is_action_released("block"):
-		end_block();
+	if is_alive():
+		# Jump
+		if ev.is_action_pressed("movt_jump"):
+			should_jump = true;
+		if ev.is_action_released("movt_jump"):
+			should_dejump = true;
+		
+		# Weapons
+		if is_wep_ranged():
+			if ev.is_action_pressed("atk_primary"):
+				shoot_ranged();
+			if ev.is_action_pressed("reload"):
+				reload_ranged();
+		else:
+			if ev.is_action_pressed("atk_primary"):
+				start_melee_attack();
+			if ev.is_action_released("atk_primary"):
+				release_melee_attack();
+		
+		if ev.is_action_pressed("block"):
+			start_block();
+		if ev.is_action_released("block"):
+			end_block();
+		
+		if ev.is_action_pressed("switch_wep"):
+			switch_wep();
 	
 	# Capture/release mouse
 	if ev.is_action_pressed("ui_cancel"):

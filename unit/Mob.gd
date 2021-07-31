@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 				pitch.rotation_degrees.x = clamp(pitch.rotation_degrees.x, -90, 90);
 				
 				# Attack if close enough
-				if dist_to_plr <= attack_range && can_wep_move():
+				if dist_to_plr <= attack_range && !is_attacking && can_wep_move():
 					start_melee_attack();
 		else:
 			roam_attention -= delta;

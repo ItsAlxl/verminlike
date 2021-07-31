@@ -1,13 +1,13 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://unit/Unit.gd" type="Script" id=1]
 [ext_resource path="res://unit/physmat_unit.tres" type="PhysicsMaterial" id=2]
 [ext_resource path="res://unit/lpc/base/masc_human.png" type="Texture" id=3]
-[ext_resource path="res://wep/hammer/hammer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://unit/unit_capsule_shape.tres" type="Shape" id=5]
 [ext_resource path="res://unit/OverlapDetect.gd" type="Script" id=6]
 [ext_resource path="res://unit/lpc/LPCLeader.gd" type="Script" id=7]
 [ext_resource path="res://unit/material_blood.tres" type="Material" id=8]
+[ext_resource path="res://unit/wep_grip.gd" type="Script" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "bash_down"
@@ -174,7 +174,35 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "prepare_left"
+resource_name = "dryfire"
+length = 0.25
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head/Pitch/wep:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.025, 0.225 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.604098, -0.435852, -0.496375 ), Vector3( 0.604098, -0.449211, -0.490142 ), Vector3( 0.604098, -0.435852, -0.496375 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head/Pitch/wep:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.025, 0.225 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -90, 0 ), Vector3( 1.17628e-07, -90, 2.692 ), Vector3( 0, -90, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
 length = 0.25
 step = 0.025
 tracks/0/type = "value"
@@ -230,8 +258,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "prepare_right"
+[sub_resource type="Animation" id=6]
 length = 0.25
 step = 0.025
 tracks/0/type = "value"
@@ -287,7 +314,53 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
+resource_name = "recoil"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head/Pitch/wep:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.025, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.604098, -0.435852, -0.496375 ), Vector3( 0.604098, -0.308121, -0.372751 ), Vector3( 0.604098, -0.435852, -0.496375 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head/Pitch/wep:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.025, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -90, 0 ), Vector3( -2.50238e-06, -90, -64.529 ), Vector3( 0, -90, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ false ],
+"method": "set_allow_wep_movt"
+}, {
+"args": [ true ],
+"method": "set_allow_wep_movt"
+} ]
+}
+
+[sub_resource type="Animation" id=8]
 length = 0.05
 step = 0.025
 tracks/0/type = "value"
@@ -343,7 +416,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=9]
 length = 0.65
 step = 0.025
 tracks/0/type = "value"
@@ -408,7 +481,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=10]
 length = 0.7
 step = 0.025
 tracks/0/type = "value"
@@ -473,7 +546,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=11]
 length = 0.5
 step = 0.025
 tracks/0/type = "value"
@@ -538,28 +611,28 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Curve" id=10]
+[sub_resource type="Curve" id=12]
 min_value = -360.0
 max_value = 360.0
 _data = [ Vector2( 0, -3.27274 ), 0.0, 0.0, 0, 0, Vector2( 0.253886, -360 ), 0.0, 0.0, 0, 0, Vector2( 1, -360 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=11]
-curve = SubResource( 10 )
-
-[sub_resource type="Curve" id=12]
-max_value = 100.0
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=13]
 curve = SubResource( 12 )
 
 [sub_resource type="Curve" id=14]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.772021, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+max_value = 100.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=15]
 curve = SubResource( 14 )
 
-[sub_resource type="ParticlesMaterial" id=16]
+[sub_resource type="Curve" id=16]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.772021, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=17]
+curve = SubResource( 16 )
+
+[sub_resource type="ParticlesMaterial" id=18]
 emission_shape = 1
 emission_sphere_radius = 0.2
 flag_rotate_y = true
@@ -568,17 +641,17 @@ initial_velocity = -2.0
 initial_velocity_random = 1.0
 angular_velocity = 360.0
 angular_velocity_random = 1.0
-angular_velocity_curve = SubResource( 11 )
+angular_velocity_curve = SubResource( 13 )
 damping = 5.0
 damping_random = 1.0
-damping_curve = SubResource( 13 )
+damping_curve = SubResource( 15 )
 scale = 5.0
 scale_random = 1.0
-scale_curve = SubResource( 15 )
+scale_curve = SubResource( 17 )
 hue_variation = -0.04
 hue_variation_random = 1.0
 
-[sub_resource type="SphereMesh" id=17]
+[sub_resource type="SphereMesh" id=19]
 material = ExtResource( 8 )
 radius = 0.02
 height = 0.04
@@ -605,8 +678,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.753756, 0 )
 
 [node name="Pitch" type="Spatial" parent="Head"]
 
-[node name="wep" parent="Head/Pitch" instance=ExtResource( 4 )]
+[node name="wep" type="Spatial" parent="Head/Pitch"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.604098, -0.435852, -0.496375 )
+script = ExtResource( 10 )
+
+[node name="belt" type="Spatial" parent="Head"]
+transform = Transform( -4.37114e-08, 0, -1, 1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 1.91069e-15, -0.703766, -0.983166, 0 )
 
 [node name="LPCLeader" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.249311, 0 )
@@ -628,12 +705,14 @@ playback_default_blend_time = 0.05
 anims/bash_down = SubResource( 1 )
 anims/block_end = SubResource( 2 )
 anims/block_start = SubResource( 3 )
-anims/prepare_left = SubResource( 4 )
-anims/prepare_right = SubResource( 5 )
-anims/reset = SubResource( 6 )
-anims/swipe_left = SubResource( 7 )
-anims/swipe_right = SubResource( 8 )
-anims/uppercut = SubResource( 9 )
+anims/dryfire = SubResource( 4 )
+anims/prepare_left = SubResource( 5 )
+anims/prepare_right = SubResource( 6 )
+anims/recoil = SubResource( 7 )
+anims/reset = SubResource( 8 )
+anims/swipe_left = SubResource( 9 )
+anims/swipe_right = SubResource( 10 )
+anims/uppercut = SubResource( 11 )
 
 [node name="OverlapDetect" type="Area" parent="."]
 script = ExtResource( 6 )
@@ -646,7 +725,7 @@ shape = ExtResource( 5 )
 one_shot = true
 
 [node name="LPCAutoAdvance" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.15
 
 [node name="ParticlesBleed" type="Particles" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
@@ -655,8 +734,8 @@ amount = 50
 one_shot = true
 explosiveness = 0.15
 randomness = 1.0
-process_material = SubResource( 16 )
-draw_pass_1 = SubResource( 17 )
+process_material = SubResource( 18 )
+draw_pass_1 = SubResource( 19 )
 
 [connection signal="animation_finished" from="animWeps" to="." method="_on_animWeps_animation_finished"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]

@@ -4,6 +4,32 @@ extends Weapon
 export var attack_chain := "";
 
 var current_attack := "" setget set_current_atk;
+var hit_so_far := [];
+
+func _init() -> void:
+	wep_type = "MELEE";
+
+func _on_HitArea_body_entered(body: PhysicsBody) -> void:
+	if body.has_method("take_atk") && !hit_so_far.has(body):
+		hit_so_far.append(body);
+		atk_unit(body);
+		AudioHit.play();
+
+# it's for a hack :)
+const RESET_AREA_OVERLAP_OFFSET := Vector3(-100, -100, -100);
+func set_hits_active(a: bool) -> void:
+	HitArea.monitoring = a;
+	
+	# Ensure subsequent attacks will trigger _on_HitArea_body_entered
+	# even though they normally wouldn't actually leave the body
+	# I told you it was a hack :)
+	if a:
+		HitArea.translation = Vector3.ZERO;
+		hit_so_far.clear();
+	else:
+		HitArea.translation = RESET_AREA_OVERLAP_OFFSET;
+	
+	is_reporting_hits = a;
 
 func set_current_atk(ca: String) -> void:
 	current_attack = ca;

@@ -9,6 +9,10 @@ onready var WepAnims := $animWeps;
 onready var StunTimer := $StunTimer;
 onready var LPCLeader := $LPCLeader;
 onready var LPCAutoAdv := $LPCAutoAdvance;
+
+onready var WepHand := $Head/Pitch/wep;
+onready var WepBelt := $Head/belt;
+
 var push_away_overlap_force := 25.0;
 
 var block_arc := 0.5; # 1 is no arc, -1 is full circle (based on dot product)
@@ -27,19 +31,47 @@ var _queue_block := false;
 var _queue_unblock := false;
 var _queue_atk_start := false;
 var _queue_atk_release := false;
+var _queue_wep_switch := false;
 
 var allow_wep_movt := true setget set_allow_wep_movt, can_wep_move;
 
 export var stun_on_hit := 0.25;
 
-func get_wep():
-	return $Head/Pitch/wep;
+func get_wep() -> Spatial:
+	if WepHand.get_child_count() == 0:
+		return null;
+	return WepHand.get_child(0) as Spatial;
+
+func switch_wep():
+	if can_wep_move():
+		_queue_block = false;
+		_queue_unblock = false;
+		_queue_atk_start = false;
+		_queue_atk_release = false;
+		_queue_wep_switch = false;
+		
+		if get_wep() != null:
+			var w := get_wep();
+			WepHand.remove_child(w);
+			WepBelt.add_child(w);
+			if w.wep_type == "RANGED":
+				w.set_eyeline_adjust(false);
+		
+		var new_wep := WepBelt.get_child(0);
+		WepBelt.remove_child(new_wep);
+		WepHand.add_child(new_wep);
+		if new_wep.wep_type == "RANGED":
+			new_wep.set_eyeline_adjust(true);
+	else:
+		_queue_wep_switch = true;
 
 func _ready() -> void:
 	head.rotation.y = rotation.y;
 	rotation.y = 0;
 	
 	get_wep().setup(self);
+	for w in WepBelt.get_children():
+		w.setup(self);
 	set_lpc_anim("IDLE");
 	hp_now = hp_max;
 
@@ -62,7 +94,9 @@ func set_allow_wep_movt(a: bool) -> void:
 		if !is_dead:
 			set_lpc_anim("IDLE");
 		
-		if _queue_atk_start:
+		if _queue_wep_switch:
+			switch_wep();
+		elif _queue_atk_start:
 			start_melee_attack();
 		elif _queue_block:
 			start_block();
@@ -81,18 +115,38 @@ func can_wep_move() -> bool:
 func blocks_preventing_attack() -> bool:
 	return is_blocking || _queue_block || WepAnims.current_animation == "block_start";
 
+func is_wep_ranged() -> bool:
+	return get_wep() != null && get_wep().wep_type == "RANGED";
+
+func shoot_ranged() -> void:
+	if is_wep_ranged() && !blocks_preventing_attack() && can_wep_move():
+		match get_wep().fire():
+			0:
+				WepAnims.play("recoil");
+			1:
+				WepAnims.play("dryfire");
+
+func reload_ranged() -> void:
+	if is_wep_ranged() && !blocks_preventing_attack() && can_wep_move():
+		if get_wep().reload():
+			WepAnims.play("dryfire");
+
 func start_melee_attack() -> void:
 	if !blocks_preventing_attack():
-		if !is_attacking && can_wep_move():
-			is_attacking = true;
-			_queue_atk_start = false;
-			next_atk_mode = "light";
-			set_lpc_anim("SWIPE");
-			WepAnims.play("prepare_" + next_prepare);
+		if _queue_atk_release:
+			_queue_atk_release = false;
 		else:
-			_queue_atk_start = true;
-			_queue_unblock = false;
-			_queue_block = false;
+			if !is_attacking && can_wep_move():
+				is_attacking = true;
+				_queue_atk_start = false;
+				
+				next_atk_mode = "light";
+				set_lpc_anim("SWIPE");
+				WepAnims.play("prepare_" + next_prepare);
+			else:
+				_queue_atk_start = true;
+				_queue_unblock = false;
+				_queue_block = false;
 
 func _allow_atk_release() -> void:
 	LPCLeader.adv_anim();
@@ -183,7 +237,8 @@ func die() -> void:
 		$ParticlesBleed.emitting = true;
 		
 		WepAnims.play("reset");
-		get_wep().visible = false;
+		WepHand.visible = false;
+		WepBelt.visible = false;
 		OverlapDetect.enable(false);
 		
 		collision_layer = CORPSE_COL_LAYER;

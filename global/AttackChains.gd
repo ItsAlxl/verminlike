@@ -19,6 +19,11 @@ var chains := {
 				"knockback": Vector2(0, 10),
 			},
 		},
+		"bash_down": {
+			"atk_extras": {
+				"dmg": 20,
+			},
+		},
 	},
 };
 
