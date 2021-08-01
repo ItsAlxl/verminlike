@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Sawmill.obj-cf86776bdbfc4ed3303bbf187100110d.mesh"
+
+[deps]
+
+files=[ "res://.import/Sawmill.obj-cf86776bdbfc4ed3303bbf187100110d.mesh" ]
+
+source_file="res://level/doodads/buildings/data/Sawmill.obj"
+dest_files=[ "res://.import/Sawmill.obj-cf86776bdbfc4ed3303bbf187100110d.mesh", "res://.import/Sawmill.obj-cf86776bdbfc4ed3303bbf187100110d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

@@ -255,6 +255,9 @@ func die() -> void:
 		collision_layer = CORPSE_COL_LAYER;
 		collision_mask = CORPSE_COL_MASK;
 
+func _cleanup() -> void:
+	queue_free();
+
 func is_alive() -> bool:
 	return !is_dead;
 

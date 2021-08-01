@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Bell_Tower.obj-b0c4339f3439d6a31fe50f8466b1edab.mesh"
+
+[deps]
+
+files=[ "res://.import/Bell_Tower.obj-b0c4339f3439d6a31fe50f8466b1edab.mesh" ]
+
+source_file="res://level/doodads/buildings/data/Bell_Tower.obj"
+dest_files=[ "res://.import/Bell_Tower.obj-b0c4339f3439d6a31fe50f8466b1edab.mesh", "res://.import/Bell_Tower.obj-b0c4339f3439d6a31fe50f8466b1edab.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
