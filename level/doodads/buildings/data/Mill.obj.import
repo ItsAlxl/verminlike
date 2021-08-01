@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Mill.obj-b4ad2cbe095d13b9f05a34a447804c1a.mesh"
+
+[deps]
+
+files=[ "res://.import/Mill.obj-b4ad2cbe095d13b9f05a34a447804c1a.mesh" ]
+
+source_file="res://level/doodads/buildings/data/Mill.obj"
+dest_files=[ "res://.import/Mill.obj-b4ad2cbe095d13b9f05a34a447804c1a.mesh", "res://.import/Mill.obj-b4ad2cbe095d13b9f05a34a447804c1a.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

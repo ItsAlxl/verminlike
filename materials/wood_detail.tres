@@ -1,0 +1,6 @@
+[gd_resource type="SpatialMaterial" format=2]
+
+[resource]
+resource_name = "RoofTiles_Red"
+albedo_color = Color( 0.52, 0.30888, 0.2184, 1 )
+metallic = 0.5

@@ -8,7 +8,6 @@ var mouse_sensitivity: float = Settings.get_data("mouse_sensitivity");
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
 	Game.plr = self;
-	._ready();
 
 func _input(ev: InputEvent) -> void:
 	# Look
@@ -56,6 +55,7 @@ func _input(ev: InputEvent) -> void:
 func die():
 	.die();
 	cam_dead.current = true;
+	$CleanUp.stop();
 
 func _process(delta: float) -> void:
 	if is_dead:

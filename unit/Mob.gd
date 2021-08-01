@@ -1,6 +1,8 @@
 class_name Mob
 extends Unit
 
+const DESPAWN_DIST := 350;
+
 signal gained_aggro();
 
 var to_plr := Vector3.ZERO;
@@ -19,6 +21,9 @@ func _physics_process(delta: float) -> void:
 	if !is_dead:
 		to_plr = Game.plr.translation - translation;
 		dist_to_plr = to_plr.length();
+		if dist_to_plr >= DESPAWN_DIST:
+			queue_free();
+		
 		to_plr_norm = to_plr / dist_to_plr;
 		
 		var plr_perspective_cross := Game.plr._get_facing_2D().cross(_get_facing_2D());

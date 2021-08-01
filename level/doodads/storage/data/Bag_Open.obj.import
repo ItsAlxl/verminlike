@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Bag_Open.obj-2178a0868e48eff302ffe009efc5964b.mesh"
+
+[deps]
+
+files=[ "res://.import/Bag_Open.obj-2178a0868e48eff302ffe009efc5964b.mesh" ]
+
+source_file="res://level/doodads/storage/data/Bag_Open.obj"
+dest_files=[ "res://.import/Bag_Open.obj-2178a0868e48eff302ffe009efc5964b.mesh", "res://.import/Bag_Open.obj-2178a0868e48eff302ffe009efc5964b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

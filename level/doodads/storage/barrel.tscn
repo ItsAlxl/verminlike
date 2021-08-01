@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://level/doodads/storage/data/Barrel.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://materials/metal_body.tres" type="Material" id=2]
+[ext_resource path="res://materials/wood_body.tres" type="Material" id=3]
+[ext_resource path="res://materials/wood_detail.tres" type="Material" id=4]
+
+[sub_resource type="CylinderShape" id=1]
+radius = 0.396015
+height = 1.0559
+
+[node name="Barrel" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 2 )
+material/2 = ExtResource( 4 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.504049, 0 )
+shape = SubResource( 1 )

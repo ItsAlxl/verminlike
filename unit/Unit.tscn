@@ -762,6 +762,7 @@ contacts_reported = 5
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 1 )
+speed_limit = 6.0
 
 [node name="Col" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
@@ -788,8 +789,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.249311, 0 )
 script = ExtResource( 7 )
 
 [node name="Base" type="Sprite3D" parent="LPCLeader"]
-offset = Vector2( 0, -50 )
-modulate = Color( 1, 1, 1, 0 )
 pixel_size = 0.05
 billboard = 2
 shaded = true

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Stable.obj-854e065d6e9e9bf827f99fee844929cd.mesh"
+
+[deps]
+
+files=[ "res://.import/Stable.obj-854e065d6e9e9bf827f99fee844929cd.mesh" ]
+
+source_file="res://level/doodads/buildings/data/Stable.obj"
+dest_files=[ "res://.import/Stable.obj-854e065d6e9e9bf827f99fee844929cd.mesh", "res://.import/Stable.obj-854e065d6e9e9bf827f99fee844929cd.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

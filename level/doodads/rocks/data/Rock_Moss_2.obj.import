@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Rock_Moss_2.obj-965a8156089f5ac573c7e0b8c61ec644.mesh"
+
+[deps]
+
+files=[ "res://.import/Rock_Moss_2.obj-965a8156089f5ac573c7e0b8c61ec644.mesh" ]
+
+source_file="res://level/doodads/rocks/data/Rock_Moss_2.obj"
+dest_files=[ "res://.import/Rock_Moss_2.obj-965a8156089f5ac573c7e0b8c61ec644.mesh", "res://.import/Rock_Moss_2.obj-965a8156089f5ac573c7e0b8c61ec644.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

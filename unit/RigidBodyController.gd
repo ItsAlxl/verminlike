@@ -38,11 +38,11 @@ onready var pitch: Spatial = $Head/Pitch; # x-axis rotation node (look up & down
 ### Integrate forces vars
 export var accel := 80.0; # Player acceleration force
 export var jump := 5.0; # Jump force multiplier
-export var dodge := 50.0; # Dodge impulse multiplier
+export var dodge := 15.0; # Dodge impulse multiplier
 export var dodge_cd := 0.75; # Dodge cooldown
 export var air_control := 0.0; # Air control multiplier
 export var turning_scale := 45.0; # How quickly to scale movement towards a turning direction. Lower is more.
-export var walkable_slope := 0.35; # Walkable slope. Lower is steeper
+export var walkable_slope := 0.65; # Walkable slope. Lower is steeper
 export var speed_limit := 2.5; # Default speed limit of the player
 export var friction_divider := 15.0; # Amount to divide the friction by when not grounded (prevents sticking to walls from air control)
 var upper_slope_normal: Vector3; # Stores the lowest (steepest) slope normal
@@ -64,7 +64,7 @@ func _physics_process(_delta: float) -> void:
 ### Groundedness raycasts
 	# Define raycast info used with detecting groundedness
 	var raycast_list := []; # List of raycasts used with detecting groundedness
-	var bottom := 0.1; # Distance down from start to fire the raycast to
+	var bottom := 0.5; # Distance down from start to fire the raycast to
 	var start: float = (capsule.height/2 + capsule.radius)-0.05; # Start point down from the center of the player to start the raycast
 	var cv_dist: float = capsule.radius-0.1; # Cardinal vector distance. Added to 2 cardinal vectors to result in a diagonal with the same magnitude of the cardinal vectors
 	var ov_dist := cv_dist/sqrt(2); # Ordinal vector distance. 

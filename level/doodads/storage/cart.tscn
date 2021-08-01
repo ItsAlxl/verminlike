@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://materials/wood_grip.tres" type="Material" id=1]
+[ext_resource path="res://materials/wood_body.tres" type="Material" id=2]
+[ext_resource path="res://materials/cloth.tres" type="Material" id=3]
+[ext_resource path="res://materials/wood_detail.tres" type="Material" id=4]
+[ext_resource path="res://level/doodads/storage/data/Cart.obj" type="ArrayMesh" id=5]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 2.13906, 1.35582 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.729938, 0.0585584, 0.892523 )
+
+[node name="Cart" type="Spatial"]
+
+[node name="Mesh" type="MeshInstance" parent="."]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+mesh = ExtResource( 5 )
+material/0 = ExtResource( 2 )
+material/1 = ExtResource( 3 )
+material/2 = ExtResource( 3 )
+material/3 = ExtResource( 4 )
+material/4 = ExtResource( 1 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.84287, -0.0967706 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59271, 2.13329 )
+shape = SubResource( 2 )

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Barn.obj-defeb8f8cd90bbba39623d332a704387.mesh"
+
+[deps]
+
+files=[ "res://.import/Barn.obj-defeb8f8cd90bbba39623d332a704387.mesh" ]
+
+source_file="res://level/doodads/buildings/data/Barn.obj"
+dest_files=[ "res://.import/Barn.obj-defeb8f8cd90bbba39623d332a704387.mesh", "res://.import/Barn.obj-defeb8f8cd90bbba39623d332a704387.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

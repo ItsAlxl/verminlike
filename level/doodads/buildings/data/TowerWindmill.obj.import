@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/TowerWindmill.obj-2f4f49782afb0c973a91c72b4a614310.mesh"
+
+[deps]
+
+files=[ "res://.import/TowerWindmill.obj-2f4f49782afb0c973a91c72b4a614310.mesh" ]
+
+source_file="res://level/doodads/buildings/data/TowerWindmill.obj"
+dest_files=[ "res://.import/TowerWindmill.obj-2f4f49782afb0c973a91c72b4a614310.mesh", "res://.import/TowerWindmill.obj-2f4f49782afb0c973a91c72b4a614310.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

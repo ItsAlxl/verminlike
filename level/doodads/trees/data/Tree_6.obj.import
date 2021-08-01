@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Tree_6.obj-55dd678916b27db26761fc8ab09d6002.mesh"
+
+[deps]
+
+files=[ "res://.import/Tree_6.obj-55dd678916b27db26761fc8ab09d6002.mesh" ]
+
+source_file="res://level/doodads/trees/data/Tree_6.obj"
+dest_files=[ "res://.import/Tree_6.obj-55dd678916b27db26761fc8ab09d6002.mesh", "res://.import/Tree_6.obj-55dd678916b27db26761fc8ab09d6002.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

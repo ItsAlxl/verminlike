@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Rock_6.obj-54fce6bf0639551cf07a95c706897674.mesh"
+
+[deps]
+
+files=[ "res://.import/Rock_6.obj-54fce6bf0639551cf07a95c706897674.mesh" ]
+
+source_file="res://level/doodads/rocks/data/Rock_6.obj"
+dest_files=[ "res://.import/Rock_6.obj-54fce6bf0639551cf07a95c706897674.mesh", "res://.import/Rock_6.obj-54fce6bf0639551cf07a95c706897674.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
