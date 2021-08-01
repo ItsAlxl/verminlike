@@ -52,8 +52,6 @@ func _physics_process(delta: float) -> void:
 			else:
 				LPCLeader.facing_dir = 1;
 		
-		._physics_process(delta);
-		
 		if is_aggro_to_plr():
 			if !is_attacking:
 				# Look at the player

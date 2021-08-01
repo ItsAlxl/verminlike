@@ -1,0 +1,8 @@
+{
+	"contains_albedo": false,
+	"resolution": 512,
+	"src": {
+		"a": "res://materials/terrain/rock/Rock_028_ROUGH.jpg",
+		"rgb": "res://materials/terrain/rock/Rock_028_NORM.jpg"
+	}
+}

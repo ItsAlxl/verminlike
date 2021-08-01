@@ -2,7 +2,7 @@
 	"contains_albedo": false,
 	"resolution": 512,
 	"src": {
-		"a": "res://materials/terrain/rock/Rock_028_ROUGH.jpg",
-		"rgb": "res://materials/terrain/rock/Rock_028_NORM.jpg"
+		"a": "res://materials/terrain/grass/Stylized_Grass_002_roughness.jpg",
+		"rgb": "res://materials/terrain/grass/Stylized_Grass_002_normal.jpg"
 	}
 }

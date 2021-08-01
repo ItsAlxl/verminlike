@@ -1,6 +1,7 @@
 extends Spatial
 
 export var on_timer := -1;
+export var spawn_per_timer := 1.0;
 export var dist_sq_to_plr := 500.0;
 export var spread := Vector2(0, 0);
 export var initial := 0;
@@ -41,4 +42,5 @@ func enable(en: bool) -> void:
 			$SpawnTime.stop();
 
 func _on_SpawnTime_timeout():
-	spawn(false);
+	for i in range(spawn_per_timer):
+		spawn(false);

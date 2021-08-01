@@ -22,7 +22,7 @@ func add_mob(at_transl: Vector3, limit_after := true) -> void:
 
 func rem_mob(m: Mob) -> void:
 	all_mobs.erase(m);
-	remove_child(m);
+	m.sleeping = true;
 	m.queue_free();
 
 func _rem_furthest_mob() -> void:

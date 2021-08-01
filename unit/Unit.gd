@@ -64,6 +64,12 @@ func _perf_wep_switch() -> void:
 		if w.wep_type == "RANGED":
 			w.set_eyeline_adjust(false);
 	
+	_queue_block = false;
+	_queue_unblock = false;
+	_queue_atk_start = false;
+	_queue_atk_release = false;
+	_queue_wep_switch = false;
+	
 	var new_wep := WepBelt.get_child(0);
 	WepBelt.remove_child(new_wep);
 	WepHand.add_child(new_wep);
