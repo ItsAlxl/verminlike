@@ -4,13 +4,13 @@
 [ext_resource path="res://wep/wep_melee.gd" type="Script" id=2]
 [ext_resource path="res://wep/hammer/hammer.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://materials/wood_grip.tres" type="Material" id=4]
-[ext_resource path="res://materials/metal_dark.tres" type="Material" id=5]
+[ext_resource path="res://materials/metal_brass.tres" type="Material" id=5]
 [ext_resource path="res://materials/metal_body.tres" type="Material" id=6]
 [ext_resource path="res://materials/wood_body.tres" type="Material" id=7]
 [ext_resource path="res://wep/sounds/deep_smack.ogg" type="AudioStream" id=8]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.300082, 0.163928, 0.140098 )
+extents = Vector3( 0.300082, 0.249136, 0.140098 )
 
 [node name="Hammer" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -27,7 +27,7 @@ material/2 = ExtResource( 7 )
 material/3 = ExtResource( 5 )
 
 [node name="Head" type="CollisionShape" parent="HitArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.686982, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.604061, 0 )
 shape = SubResource( 1 )
 
 [node name="AudioHit" parent="." index="2"]

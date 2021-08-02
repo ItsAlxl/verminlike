@@ -25,6 +25,21 @@ var chains := {
 			},
 		},
 	},
+	"spear": {
+		"": {
+			"light": "swipe_left",
+			"heavy": "stab_right",
+			
+			"prep_type": "stab",
+		},
+		"stab_right": {
+			"light": "swipe_right",
+			"heavy": "stab_left",
+			
+			"end_side": "left",
+			"prep_type": "stab",
+		}
+	},
 };
 
 func get_base_anim(chain: String, mode: String) -> String:
@@ -40,6 +55,9 @@ func get_next_anim(chain: String, mode: String, anim := "") -> String:
 
 func get_anim_ending_side(chain: String, anim := "") -> String:
 	return _safe_get(chain, anim, "end_side", "right");
+
+func get_anim_prep_type(chain: String, anim := "") -> String:
+	return _safe_get(chain, anim, "prep_type", "swipe");
 
 func get_attack_extras(chain: String, anim := "") -> Dictionary:
 	return _safe_get(chain, anim, "atk_extras", {});

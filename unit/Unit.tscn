@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://unit/Unit.gd" type="Script" id=1]
 [ext_resource path="res://unit/physmat_unit.tres" type="PhysicsMaterial" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://unit/material_blood.tres" type="Material" id=8]
 [ext_resource path="res://wep/revolver/revolver.tscn" type="PackedScene" id=9]
 [ext_resource path="res://unit/wep_grip.gd" type="Script" id=10]
+[ext_resource path="res://wep/spear/Spear.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "bash_down"
@@ -204,7 +205,65 @@ tracks/1/keys = {
 "values": [ Vector3( 0, -90, 0 ), Vector3( 1.17628e-07, -90, 2.692 ), Vector3( 0, -90, 0 ) ]
 }
 
+[sub_resource type="Animation" id=25]
+resource_name = "prepare_left_stab"
+length = 0.25
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head/Pitch/wep:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.801896, -0.435852, -0.40242 ), Vector3( -0.824538, -0.679319, 0.0401785 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head/Pitch/wep:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -43.0581, -8.88085, -3.08117 ), Vector3( 36.9329, 60.4014, -125.855 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("Head/Pitch/wep")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.075, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "_allow_atk_release"
+}, {
+"args": [ false ],
+"method": "set_allow_wep_movt"
+} ]
+}
+
 [sub_resource type="Animation" id=5]
+resource_name = "prepare_left_swipe"
 length = 0.25
 step = 0.025
 tracks/0/type = "value"
@@ -260,7 +319,65 @@ tracks/3/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=24]
+resource_name = "prepare_right_stab"
+length = 0.25
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head/Pitch/wep:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.604098, -0.435852, -0.496375 ), Vector3( 0.777438, -0.181166, 0.109117 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head/Pitch/wep:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -90, 0 ), Vector3( -111.904, 0, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("Head/Pitch/wep")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.075, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "_allow_atk_release"
+}, {
+"args": [ false ],
+"method": "set_allow_wep_movt"
+} ]
+}
+
 [sub_resource type="Animation" id=6]
+resource_name = "prepare_right_swipe"
 length = 0.25
 step = 0.025
 tracks/0/type = "value"
@@ -320,20 +437,25 @@ tracks/3/keys = {
 resource_name = "recoil"
 length = 0.5
 step = 0.025
-tracks/0/type = "value"
-tracks/0/path = NodePath("Head/Pitch/wep:translation")
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.025, 0.45 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.604098, -0.435852, -0.496375 ), Vector3( 0.604098, -0.308121, -0.372751 ), Vector3( 0.604098, -0.435852, -0.496375 ) ]
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ false ],
+"method": "_set_owner_can_move_wep"
+}, {
+"args": [ true ],
+"method": "_set_owner_can_move_wep"
+} ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Head/Pitch/wep:rotation_degrees")
+tracks/1/path = NodePath("MoveWithGun:translation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -342,24 +464,43 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.025, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, -90, 0 ), Vector3( -2.50238e-06, -90, -64.529 ), Vector3( 0, -90, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0.249439, 0.32714, 0 ), Vector3( 0, 0, 0 ) ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
+tracks/2/type = "value"
+tracks/2/path = NodePath("MoveWithGun:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 0.025, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, -71.019 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MuzzleFlash:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.05 ),
 "transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [ false ],
-"method": "set_allow_wep_movt"
-}, {
-"args": [ true ],
-"method": "set_allow_wep_movt"
-} ]
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ParticlesMuzzleFlash:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -413,6 +554,138 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
+"args": [  ],
+"method": "reset_attack_chain"
+} ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "stab_left"
+length = 0.65
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head/Pitch/wep:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.325, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.688616, -0.89902, -0.52461 ), Vector3( -0.179562, -0.435852, -1.51428 ), Vector3( 0.629284, -0.435852, -0.56586 ), Vector3( 0.604098, -0.435852, -0.496375 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head/Pitch/wep:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15, 0.325, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -66.2101, -171.141, 160.244 ), Vector3( -75.5579, 1.18552, -9.68149 ), Vector3( -57.2432, 21.8456, 6.37862e-06 ), Vector3( 0, -90, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("Head/Pitch/wep")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_hits_active"
+}, {
+"args": [ false ],
+"method": "set_hits_active"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.25, 0.475 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [ false ],
+"method": "set_allow_wep_movt"
+}, {
+"args": [ true ],
+"method": "set_allow_wep_movt"
+}, {
+"args": [  ],
+"method": "reset_attack_chain"
+} ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "stab_right"
+length = 0.65
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head/Pitch/wep:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.325, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.777556, -0.276275, -0.322633 ), Vector3( 0.0540869, -0.435852, -1.61149 ), Vector3( 0.629284, -0.435852, -0.56586 ), Vector3( 0.604098, -0.435852, -0.496375 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head/Pitch/wep:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15, 0.325, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -68.1083, -150.4, 159.45 ), Vector3( -80.4138, -179.685, 179.519 ), Vector3( -57.2432, 21.8456, 6.37862e-06 ), Vector3( 0, -90, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("Head/Pitch/wep")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_hits_active"
+}, {
+"args": [ false ],
+"method": "set_hits_active"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.25, 0.475 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [ false ],
+"method": "set_allow_wep_movt"
+}, {
+"args": [ true ],
+"method": "set_allow_wep_movt"
+}, {
 "args": [  ],
 "method": "reset_attack_chain"
 } ]
@@ -773,16 +1046,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.753756, 0 )
 
 [node name="Pitch" type="Spatial" parent="Head"]
 
-[node name="wep" type="Spatial" parent="Head/Pitch"]
+[node name="belt" type="Spatial" parent="Head/Pitch"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.604098, -0.435852, -0.496375 )
+visible = false
+
+[node name="wep" type="Spatial" parent="Head/Pitch"]
+transform = Transform( -0.417724, -0.573077, 0.705046, -0.122485, 0.804427, 0.581287, -0.90028, 0.156459, -0.406222, -0.853665, -0.435852, -0.216842 )
 script = ExtResource( 10 )
 
 [node name="DBGHammer" parent="Head/Pitch/wep" instance=ExtResource( 4 )]
+visible = false
 
 [node name="DBGRevolver" parent="Head/Pitch/wep" instance=ExtResource( 9 )]
+visible = false
 
-[node name="belt" type="Spatial" parent="Head"]
-transform = Transform( -4.37114e-08, 0, -1, 1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 1.91069e-15, -0.703766, -0.983166, 0 )
+[node name="DBGSpear" parent="Head/Pitch/wep" instance=ExtResource( 11 )]
 
 [node name="LPCLeader" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.249311, 0 )
@@ -805,10 +1083,14 @@ anims/bash_down = SubResource( 1 )
 anims/block_end = SubResource( 2 )
 anims/block_start = SubResource( 3 )
 anims/dryfire = SubResource( 4 )
-anims/prepare_left = SubResource( 5 )
-anims/prepare_right = SubResource( 6 )
+anims/prepare_left_stab = SubResource( 25 )
+anims/prepare_left_swipe = SubResource( 5 )
+anims/prepare_right_stab = SubResource( 24 )
+anims/prepare_right_swipe = SubResource( 6 )
 anims/recoil = SubResource( 7 )
 anims/reset = SubResource( 8 )
+anims/stab_left = SubResource( 23 )
+anims/stab_right = SubResource( 22 )
 anims/swipe_left = SubResource( 9 )
 anims/swipe_right = SubResource( 10 )
 anims/switch_weps = SubResource( 11 )

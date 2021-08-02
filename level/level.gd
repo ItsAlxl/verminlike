@@ -29,7 +29,14 @@ func _rem_furthest_mob() -> void:
 	var fm: Mob = null;
 	var fdsq := 0.0;
 	for m in all_mobs:
+		if m.is_dead:
+			fm = m;
+			break;
 		if m.dist_sq_to_plr > fdsq:
 			fdsq = m.dist_sq_to_plr;
 			fm = m;
 	rem_mob(fm);
+
+func clear_all_mobs() -> void:
+	for m in all_mobs.duplicate():
+		rem_mob(m);

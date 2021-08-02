@@ -11,7 +11,7 @@ onready var LPCLeader := $LPCLeader;
 onready var LPCAutoAdv := $LPCAutoAdvance;
 
 onready var WepHand := $Head/Pitch/wep;
-onready var WepBelt := $Head/belt;
+onready var WepBelt := $Head/Pitch/belt;
 
 var push_away_overlap_force := 25.0;
 
@@ -20,7 +20,8 @@ var block_arc := 0.5; # 1 is no arc, -1 is full circle (based on dot product)
 var is_attacking := false;
 var current_chain_anim := "";
 var next_atk_mode := "";
-var next_prepare := "right";
+var next_prepare_side := "right";
+var next_prepare_type := "";
 
 var is_blocking := false setget set_is_blocking;
 var block_start_time := -1;
@@ -77,10 +78,10 @@ func _perf_wep_switch() -> void:
 		new_wep.set_eyeline_adjust(true);
 
 func _ready() -> void:
-	for dbg in [get_node_or_null("Head/Pitch/wep/DBGHammer"), get_node_or_null("Head/Pitch/wep/DBGRevolver")]:
-		if dbg != null:
-			dbg.get_parent().remove_child(dbg);
-			dbg.queue_free();
+	for c in WepHand.get_children():
+		if c.name.begins_with("DBG"):
+			c.get_parent().remove_child(c);
+			c.queue_free();
 	
 	head.rotation.y = rotation.y;
 	rotation.y = 0;
@@ -123,7 +124,9 @@ func reset_attack_chain() -> void:
 	if !is_dead:
 		LPCLeader.adv_anim();
 	current_chain_anim = "";
-	next_prepare = "right";
+	next_prepare_side = "right";
+	if !is_wep_ranged():
+		next_prepare_type = get_wep().get_anim_preptype();
 
 func can_wep_move() -> bool:
 	return allow_wep_movt;
@@ -137,8 +140,6 @@ func is_wep_ranged() -> bool:
 func shoot_ranged() -> void:
 	if is_wep_ranged() && !blocks_preventing_attack() && can_wep_move():
 		match get_wep().fire():
-			0:
-				WepAnims.play("recoil");
 			1:
 				WepAnims.play("dryfire");
 
@@ -158,7 +159,7 @@ func start_melee_attack() -> void:
 				
 				next_atk_mode = "light";
 				set_lpc_anim("SWIPE");
-				WepAnims.play("prepare_" + next_prepare);
+				WepAnims.play("prepare_" + next_prepare_side + "_" + next_prepare_type);
 			else:
 				_queue_atk_start = true;
 				_queue_unblock = false;
@@ -180,7 +181,8 @@ func release_melee_attack() -> void:
 			var attack_anim: String = get_wep().get_next_atk_anim(current_chain_anim, next_atk_mode);
 			next_atk_mode = "";
 			
-			next_prepare = get_wep().get_anim_ending_side(attack_anim);
+			next_prepare_side = get_wep().get_anim_ending_side(attack_anim);
+			next_prepare_type = get_wep().get_anim_preptype(attack_anim);
 			get_wep().set_current_atk(attack_anim);
 			WepAnims.play(attack_anim);
 			current_chain_anim = attack_anim;
@@ -330,7 +332,7 @@ func _heavy_ready() -> void:
 	next_atk_mode = "heavy";
 
 func _on_animWeps_animation_finished(anim: String) -> void:
-	if anim == "prepare_right" || anim == "prepare_left":
+	if anim.begins_with("prepare_"):
 		_heavy_ready();
 
 func set_lpc_anim(an: String, restart := true) -> void:

@@ -40,5 +40,8 @@ func get_next_atk_anim(atk_anim_name: String, mode: String) -> String:
 func get_anim_ending_side(atk_anim_name: String) -> String:
 	return AttackChains.get_anim_ending_side(attack_chain, atk_anim_name);
 
+func get_anim_preptype(atk_anim_name := "") -> String:
+	return AttackChains.get_anim_prep_type(attack_chain, atk_anim_name);
+
 func get_atk_extras() -> Dictionary:
 	return AttackChains.get_attack_extras(attack_chain, current_attack);

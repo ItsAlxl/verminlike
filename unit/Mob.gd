@@ -107,7 +107,8 @@ func _on_AggroBubble_body_entered(body: PhysicsBody) -> void:
 			if body.is_aggro_to_plr():
 				spread_aggro();
 			else:
-				body.connect("gained_aggro", self, "spread_aggro");
+				if !body.is_connected("gained_aggro", self, "spread_aggro"):
+					body.connect("gained_aggro", self, "spread_aggro");
 
 func _on_AggroBubble_body_exited(body: PhysicsBody) -> void:
 	if !sleeping && !is_dead:

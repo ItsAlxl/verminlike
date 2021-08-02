@@ -1,9 +1,9 @@
 class_name RangedWeapon
 extends Weapon
 
-onready var AudioDry = $AudioDry;
-onready var AudioReload = $AudioReload;
-onready var AudioReloadDone = $AudioReloadDone;
+onready var AudioDry = $MoveWithGun/AudioDry
+onready var AudioReload = $MoveWithGun/AudioReload;
+onready var AudioReloadDone = $MoveWithGun/AudioReloadDone;
 
 export var spread := Vector2(0.0, 0.0);
 export var fire_cd := 0.1;
@@ -33,6 +33,9 @@ func _ready() -> void:
 func setup(uown: Unit) -> void:
 	.setup(uown);
 	report_ammo_to_hud();
+
+func _set_owner_can_move_wep(a: bool) -> void:
+	unit_owner.set_allow_wep_movt(a);
 
 func _physics_process(delta: float) -> void:
 	if fire_cd_now > 0:
@@ -72,6 +75,7 @@ func fire() -> int:
 			
 			fire_cd_now = fire_cd;
 			AudioHit.play();
+			$AnimGun.play("recoil");
 			return 0;
 	else:
 		AudioDry.play();
