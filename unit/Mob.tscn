@@ -10,7 +10,7 @@ height = 3.0
 
 [node name="Mob" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-speed_limit = 8.0
+speed_limit = 6.5
 hp_max = 30.0
 
 [node name="Spear" parent="Head/Pitch/wep" index="3" instance=ExtResource( 2 )]

@@ -1,8 +1,8 @@
 extends CanvasLayer
 
-func take_readout(readout: String) -> void:
-	$Control/Readout.text = readout;
+func enable(e: bool) -> void:
+	$InGameHUD.visible = e;
 
 func take_ammo(at: int, of: int) -> void:
-	$RevolverAmmo.set_max(of);
-	$RevolverAmmo.set_now(at);
+	$InGameHUD/RevolverAmmo.set_max(of);
+	$InGameHUD/RevolverAmmo.set_now(at);

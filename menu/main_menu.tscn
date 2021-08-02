@@ -1,0 +1,106 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://menu/main_menu.gd" type="Script" id=1]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RTLCredits" type="RichTextLabel" parent="."]
+visible = false
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -369.0
+margin_right = 658.0
+margin_bottom = 369.0
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxMenu" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -429.0
+margin_top = -95.0
+margin_right = -94.0
+margin_bottom = 151.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnPlay" type="Button" parent="VBoxMenu"]
+margin_right = 335.0
+margin_bottom = 20.0
+text = "Begin"
+
+[node name="BtnDbg" type="Button" parent="VBoxMenu"]
+margin_top = 40.0
+margin_right = 335.0
+margin_bottom = 60.0
+text = "Debug"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxMenu"]
+margin_top = 80.0
+margin_right = 335.0
+margin_bottom = 84.0
+
+[node name="LblVol" type="Label" parent="VBoxMenu"]
+margin_top = 104.0
+margin_right = 335.0
+margin_bottom = 118.0
+text = "Master Volume"
+
+[node name="NUDVol" type="SpinBox" parent="VBoxMenu/LblVol"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -74.0
+value = 75.0
+rounded = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SliderVol" type="HSlider" parent="VBoxMenu"]
+margin_top = 138.0
+margin_right = 335.0
+margin_bottom = 154.0
+value = 75.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxMenu"]
+margin_top = 174.0
+margin_right = 335.0
+margin_bottom = 178.0
+
+[node name="BtnCredits" type="Button" parent="VBoxMenu"]
+margin_top = 198.0
+margin_right = 335.0
+margin_bottom = 218.0
+toggle_mode = true
+text = "Credits"
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxMenu"]
+margin_top = 238.0
+margin_right = 335.0
+margin_bottom = 242.0
+
+[node name="BtnQuit" type="Button" parent="VBoxMenu"]
+margin_top = 262.0
+margin_right = 335.0
+margin_bottom = 282.0
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="toggled" from="VBoxMenu/BtnCredits" to="." method="_on_BtnCredits_toggled"]

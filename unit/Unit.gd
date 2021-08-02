@@ -337,6 +337,7 @@ func _on_animWeps_animation_finished(anim: String) -> void:
 
 func set_lpc_anim(an: String, restart := true) -> void:
 	LPCLeader.set_anim_name(an, restart);
+	LPCLeader.flip_h = next_prepare_side == "left";
 	if an == "MOVE" || an == "DEAD":
 		if LPCAutoAdv.is_stopped():
 			LPCAutoAdv.start();

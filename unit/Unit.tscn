@@ -205,7 +205,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, -90, 0 ), Vector3( 1.17628e-07, -90, 2.692 ), Vector3( 0, -90, 0 ) ]
 }
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=5]
 resource_name = "prepare_left_stab"
 length = 0.25
 step = 0.025
@@ -219,7 +219,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.25 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( -0.801896, -0.435852, -0.40242 ), Vector3( -0.824538, -0.679319, 0.0401785 ) ]
+"values": [ Vector3( -0.801896, -0.435852, -0.40242 ), Vector3( -0.689831, -0.443703, 0.0664315 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Head/Pitch/wep:rotation_degrees")
@@ -231,7 +231,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.25 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( -43.0581, -8.88085, -3.08117 ), Vector3( 36.9329, 60.4014, -125.855 ) ]
+"values": [ Vector3( -43.0581, -8.88085, -3.08117 ), Vector3( 51.3208, 86.5725, -85.4457 ) ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath("Head/Pitch/wep")
@@ -262,8 +262,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "prepare_left_swipe"
+[sub_resource type="Animation" id=6]
 length = 0.25
 step = 0.025
 tracks/0/type = "value"
@@ -319,7 +318,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=7]
 resource_name = "prepare_right_stab"
 length = 0.25
 step = 0.025
@@ -333,7 +332,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.25 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0.604098, -0.435852, -0.496375 ), Vector3( 0.777438, -0.181166, 0.109117 ) ]
+"values": [ Vector3( 0.604098, -0.435852, -0.496375 ), Vector3( 0.855747, -0.637416, 0.109 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Head/Pitch/wep:rotation_degrees")
@@ -345,7 +344,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.25 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, -90, 0 ), Vector3( -111.904, 0, 0 ) ]
+"values": [ Vector3( 0, -90, 0 ), Vector3( -79.4647, 4.60935, 5.64563 ) ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath("Head/Pitch/wep")
@@ -376,8 +375,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "prepare_right_swipe"
+[sub_resource type="Animation" id=8]
 length = 0.25
 step = 0.025
 tracks/0/type = "value"
@@ -433,8 +431,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "recoil"
+[sub_resource type="Animation" id=9]
 length = 0.5
 step = 0.025
 tracks/0/type = "method"
@@ -503,7 +500,7 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=10]
 length = 0.05
 step = 0.025
 tracks/0/type = "value"
@@ -559,7 +556,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=11]
 resource_name = "stab_left"
 length = 0.65
 step = 0.025
@@ -570,10 +567,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.325, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.15, 0.25, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( -0.688616, -0.89902, -0.52461 ), Vector3( -0.179562, -0.435852, -1.51428 ), Vector3( 0.629284, -0.435852, -0.56586 ), Vector3( 0.604098, -0.435852, -0.496375 ) ]
+"values": [ Vector3( -0.689, -0.399, -0.22 ), Vector3( -0.115, -0.322, -1.417 ), Vector3( -0.433747, -0.383964, -0.0123902 ), Vector3( 0.501823, -0.435852, -0.287565 ), Vector3( 0.604098, -0.435852, -0.496375 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Head/Pitch/wep:rotation_degrees")
@@ -582,10 +579,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.15, 0.325, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.15, 0.25, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( -66.2101, -171.141, 160.244 ), Vector3( -75.5579, 1.18552, -9.68149 ), Vector3( -57.2432, 21.8456, 6.37862e-06 ), Vector3( 0, -90, 0 ) ]
+"values": [ Vector3( 50.2869, 71.5987, -93.0213 ), Vector3( -10.7559, 81.5792, -86.8103 ), Vector3( -50.6658, 53.4862, -57.6622 ), Vector3( -57.2432, 21.8456, 6.37862e-06 ), Vector3( 0, -90, 0 ) ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath("Head/Pitch/wep")
@@ -625,7 +622,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=12]
 resource_name = "stab_right"
 length = 0.65
 step = 0.025
@@ -639,7 +636,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.15, 0.325, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0.777556, -0.276275, -0.322633 ), Vector3( 0.0540869, -0.435852, -1.61149 ), Vector3( 0.629284, -0.435852, -0.56586 ), Vector3( 0.604098, -0.435852, -0.496375 ) ]
+"values": [ Vector3( 0.778, -0.185808, -0.323 ), Vector3( 0.054, -0.532542, -1.611 ), Vector3( 0.629284, -0.435852, -0.56586 ), Vector3( 0.604098, -0.435852, -0.496375 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Head/Pitch/wep:rotation_degrees")
@@ -651,7 +648,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.15, 0.325, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( -68.1083, -150.4, 159.45 ), Vector3( -80.4138, -179.685, 179.519 ), Vector3( -57.2432, 21.8456, 6.37862e-06 ), Vector3( 0, -90, 0 ) ]
+"values": [ Vector3( -79.3625, -93.8942, 101.207 ), Vector3( -85.6118, -0.685605, 0.513209 ), Vector3( -57.2432, 21.8456, 6.37862e-06 ), Vector3( 0, -90, 0 ) ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath("Head/Pitch/wep")
@@ -691,7 +688,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=13]
 length = 0.65
 step = 0.025
 tracks/0/type = "value"
@@ -756,7 +753,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=14]
 length = 0.7
 step = 0.025
 tracks/0/type = "value"
@@ -821,8 +818,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=11]
-resource_name = "switch_weps"
+[sub_resource type="Animation" id=15]
 length = 0.2
 step = 0.025
 tracks/0/type = "value"
@@ -870,7 +866,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=16]
 length = 0.5
 step = 0.025
 tracks/0/type = "value"
@@ -935,28 +931,28 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Curve" id=13]
+[sub_resource type="Curve" id=17]
 min_value = -360.0
 max_value = 360.0
 _data = [ Vector2( 0, -3.27274 ), 0.0, 0.0, 0, 0, Vector2( 0.253886, -360 ), 0.0, 0.0, 0, 0, Vector2( 1, -360 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=14]
-curve = SubResource( 13 )
-
-[sub_resource type="Curve" id=15]
-max_value = 100.0
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=16]
-curve = SubResource( 15 )
-
-[sub_resource type="Curve" id=17]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.772021, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
 [sub_resource type="CurveTexture" id=18]
 curve = SubResource( 17 )
 
-[sub_resource type="ParticlesMaterial" id=19]
+[sub_resource type="Curve" id=19]
+max_value = 100.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=20]
+curve = SubResource( 19 )
+
+[sub_resource type="Curve" id=21]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.772021, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=22]
+curve = SubResource( 21 )
+
+[sub_resource type="ParticlesMaterial" id=23]
 emission_shape = 1
 emission_sphere_radius = 0.2
 flag_rotate_y = true
@@ -965,25 +961,24 @@ initial_velocity = -2.0
 initial_velocity_random = 1.0
 angular_velocity = 360.0
 angular_velocity_random = 1.0
-angular_velocity_curve = SubResource( 14 )
+angular_velocity_curve = SubResource( 18 )
 damping = 5.0
 damping_random = 1.0
-damping_curve = SubResource( 16 )
+damping_curve = SubResource( 20 )
 scale = 5.0
 scale_random = 1.0
-scale_curve = SubResource( 18 )
+scale_curve = SubResource( 22 )
 hue_variation = -0.04
 hue_variation_random = 1.0
 
-[sub_resource type="SphereMesh" id=20]
+[sub_resource type="SphereMesh" id=24]
 material = ExtResource( 8 )
 radius = 0.02
 height = 0.04
 radial_segments = 8
 rings = 8
 
-[sub_resource type="Animation" id=21]
-resource_name = "cleanup"
+[sub_resource type="Animation" id=25]
 length = 60.0
 step = 1.0
 tracks/0/type = "value"
@@ -1051,7 +1046,7 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.60409
 visible = false
 
 [node name="wep" type="Spatial" parent="Head/Pitch"]
-transform = Transform( -0.417724, -0.573077, 0.705046, -0.122485, 0.804427, 0.581287, -0.90028, 0.156459, -0.406222, -0.853665, -0.435852, -0.216842 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 0.999999, 0, 1, 0, -4.37114e-08, 0.604098, -0.435852, -0.496375 )
 script = ExtResource( 10 )
 
 [node name="DBGHammer" parent="Head/Pitch/wep" instance=ExtResource( 4 )]
@@ -1083,18 +1078,18 @@ anims/bash_down = SubResource( 1 )
 anims/block_end = SubResource( 2 )
 anims/block_start = SubResource( 3 )
 anims/dryfire = SubResource( 4 )
-anims/prepare_left_stab = SubResource( 25 )
-anims/prepare_left_swipe = SubResource( 5 )
-anims/prepare_right_stab = SubResource( 24 )
-anims/prepare_right_swipe = SubResource( 6 )
-anims/recoil = SubResource( 7 )
-anims/reset = SubResource( 8 )
-anims/stab_left = SubResource( 23 )
-anims/stab_right = SubResource( 22 )
-anims/swipe_left = SubResource( 9 )
-anims/swipe_right = SubResource( 10 )
-anims/switch_weps = SubResource( 11 )
-anims/uppercut = SubResource( 12 )
+anims/prepare_left_stab = SubResource( 5 )
+anims/prepare_left_swipe = SubResource( 6 )
+anims/prepare_right_stab = SubResource( 7 )
+anims/prepare_right_swipe = SubResource( 8 )
+anims/recoil = SubResource( 9 )
+anims/reset = SubResource( 10 )
+anims/stab_left = SubResource( 11 )
+anims/stab_right = SubResource( 12 )
+anims/swipe_left = SubResource( 13 )
+anims/swipe_right = SubResource( 14 )
+anims/switch_weps = SubResource( 15 )
+anims/uppercut = SubResource( 16 )
 
 [node name="OverlapDetect" type="Area" parent="."]
 script = ExtResource( 6 )
@@ -1116,11 +1111,11 @@ amount = 50
 one_shot = true
 explosiveness = 0.15
 randomness = 1.0
-process_material = SubResource( 19 )
-draw_pass_1 = SubResource( 20 )
+process_material = SubResource( 23 )
+draw_pass_1 = SubResource( 24 )
 
 [node name="CleanUp" type="AnimationPlayer" parent="."]
-anims/cleanup = SubResource( 21 )
+anims/cleanup = SubResource( 25 )
 
 [connection signal="animation_finished" from="animWeps" to="." method="_on_animWeps_animation_finished"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]

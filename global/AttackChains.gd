@@ -22,6 +22,7 @@ var chains := {
 		"bash_down": {
 			"atk_extras": {
 				"dmg": 15,
+				"max_hits": 1,
 			},
 		},
 	},
@@ -32,13 +33,33 @@ var chains := {
 			
 			"prep_type": "stab",
 		},
-		"stab_right": {
+		"swipe_left": {
 			"light": "swipe_right",
 			"heavy": "stab_left",
 			
 			"end_side": "left",
 			"prep_type": "stab",
-		}
+		},
+		"stab_right": {
+			"light": "swipe_left",
+			"heavy": "stab_right",
+			
+			"end_side": "right",
+			"prep_type": "stab",
+			"atk_extras": {
+				"dmg": 8,
+			},
+		},
+		"stab_left": {
+			"light": "swipe_right",
+			"heavy": "stab_left",
+			
+			"end_side": "left",
+			"prep_type": "stab",
+			"atk_extras": {
+				"dmg": 8,
+			},
+		},
 	},
 };
 

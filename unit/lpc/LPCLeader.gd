@@ -1,4 +1,3 @@
-tool
 extends Spatial
 
 const IDX_MAP := {
@@ -21,13 +20,20 @@ var current_anim := "";
 
 export var frame_x := 0 setget set_frame_x, get_frame_x;
 export var anim_idx := 0 setget set_anim_idx, get_anim_idx;
-export var flip_h := false setget set_flip_h, get_flip_h;
 
 var facing_dir := 0 setget set_facing_dir;
 
+var _corrected_fliph := false;
+var flip_h := false;
+
 func _upd_children_y() -> void:
 	var frame_y: int = IDX_MAP.DEAD if anim_idx == IDX_MAP.DEAD else anim_idx + facing_dir;
-	set_flip_h(anim_idx == IDX_MAP.SWIPE && facing_dir == 2);
+	
+	_corrected_fliph = flip_h;
+	if anim_idx == IDX_MAP.SWIPE && facing_dir == 2:
+		_corrected_fliph = !_corrected_fliph;
+	set_flip_h(_corrected_fliph);
+	
 	for c in get_children():
 		if c is Sprite3D:
 			c.frame_coords.y = frame_y;
@@ -51,12 +57,9 @@ func set_facing_dir(fd: int) -> void:
 	_upd_children_y();
 
 func set_flip_h(fh: bool) -> void:
-	flip_h = fh;
 	for c in get_children():
 		if c is Sprite3D:
 			c.flip_h = fh;
-func get_flip_h() -> bool:
-	return flip_h;
 
 func set_anim_name(an: String, restart := true) -> void:
 	if restart || an != current_anim:

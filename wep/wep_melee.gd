@@ -10,7 +10,7 @@ func _init() -> void:
 	wep_type = "MELEE";
 
 func _on_HitArea_body_entered(body: PhysicsBody) -> void:
-	if body.has_method("take_atk") && !hit_so_far.has(body):
+	if body.has_method("take_atk") && !hit_so_far.has(body) && hit_so_far.size() < get_atk_extras().get("max_hits", INF):
 		hit_so_far.append(body);
 		atk_unit(body);
 		AudioHit.play();

@@ -177,7 +177,7 @@ func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	### Dodging
 		var move := get_movt_vect(); # Get movement vector relative to player orientation
 		
-		if should_dodge:
+		if should_dodge && is_grounded:
 			should_dodge = false;
 			if dodge_cd_now <= 0.0:
 				dodge_cd_now = dodge_cd;

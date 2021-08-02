@@ -10,12 +10,12 @@
 [ext_resource path="res://wep/sounds/deep_smack.ogg" type="AudioStream" id=8]
 
 [sub_resource type="CylinderShape" id=1]
-radius = 0.0782066
+radius = 0.13769
 height = 1.22548
 
 [node name="Spear" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-dmg = 15.0
+dmg = 7.0
 knockback = Vector2( 3, 1 )
 attack_chain = "spear"
 
