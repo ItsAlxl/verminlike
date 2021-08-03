@@ -5,6 +5,7 @@ var all_mobs := [];
 
 func _ready() -> void:
 	Game.level = self;
+	HUD.enable(true);
 
 func add_mob(at_transl: Vector3, limit_after := true) -> void:
 	var at_cap := all_mobs.size() >= MAX_MOBS;

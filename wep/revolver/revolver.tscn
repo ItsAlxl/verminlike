@@ -19,20 +19,20 @@
 [sub_resource type="RayShape" id=1]
 length = 100.0
 
-[sub_resource type="Gradient" id=11]
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.401099, 0.703297, 1 )
 colors = PoolColorArray( 1, 0.539063, 0, 1, 1, 0.537255, 0, 1, 0.722656, 0.722656, 0.722656, 0.698039, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=12]
-gradient = SubResource( 11 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="Curve" id=15]
+[sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.258537, 0.990909 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=16]
-curve = SubResource( 15 )
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=8]
+[sub_resource type="ParticlesMaterial" id=6]
 render_priority = -10
 direction = Vector3( -1, 0, 0 )
 spread = 20.0
@@ -48,13 +48,13 @@ tangential_accel_random = 1.0
 angle = 360.0
 angle_random = 1.0
 scale = 0.75
-scale_curve = SubResource( 16 )
-color_ramp = SubResource( 12 )
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
 anim_speed = 1.0
 anim_offset = 1.0
 anim_offset_random = 1.0
 
-[sub_resource type="SpatialMaterial" id=9]
+[sub_resource type="SpatialMaterial" id=7]
 flags_transparent = true
 flags_unshaded = true
 vertex_color_use_as_albedo = true
@@ -66,11 +66,10 @@ particles_anim_v_frames = 5
 particles_anim_loop = true
 albedo_texture = ExtResource( 15 )
 
-[sub_resource type="QuadMesh" id=10]
-material = SubResource( 9 )
+[sub_resource type="QuadMesh" id=8]
+material = SubResource( 7 )
 
-[sub_resource type="Animation" id=7]
-resource_name = "recoil"
+[sub_resource type="Animation" id=9]
 length = 0.5
 step = 0.025
 tracks/0/type = "method"
@@ -195,8 +194,8 @@ one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 draw_order = 2
-process_material = SubResource( 8 )
-draw_pass_1 = SubResource( 10 )
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 8 )
 
 [node name="MuzzleFlash" type="Spatial" parent="." index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.613598, 0.122903, 0 )
@@ -207,6 +206,6 @@ light_color = Color( 1, 0.752941, 0.227451, 1 )
 omni_range = 10.0
 
 [node name="AnimGun" type="AnimationPlayer" parent="." index="5"]
-anims/recoil = SubResource( 7 )
+anims/recoil = SubResource( 9 )
 
 [connection signal="body_exited" from="HitArea" to="." method="_on_HitArea_body_exited"]

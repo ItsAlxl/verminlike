@@ -86,11 +86,15 @@ func _ready() -> void:
 	head.rotation.y = rotation.y;
 	rotation.y = 0;
 	
+	_setup_weps();
+	
+	set_lpc_anim("IDLE");
+	hp_now = hp_max;
+
+func _setup_weps() -> void:
 	get_wep().setup(self);
 	for w in WepBelt.get_children():
 		w.setup(self);
-	set_lpc_anim("IDLE");
-	hp_now = hp_max;
 
 func _physics_process(_delta: float) -> void:
 	var push_away := Vector3.ZERO;
