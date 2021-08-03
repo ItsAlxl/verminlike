@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://hud/elements/ammo_pool/ammo_pool.gd" type="Script" id=1]
+
+[node name="AmmoPool" type="GridContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 6
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

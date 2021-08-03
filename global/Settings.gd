@@ -1,7 +1,7 @@
 extends Node
 
 var data := {
-	"mouse_sensitivity": 0.0009,
+	"look_sensitivity": 9,
 	"master_vol": 80,
 };
 

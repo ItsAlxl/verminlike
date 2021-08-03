@@ -16,6 +16,7 @@ onready var WepBelt := $Head/Pitch/belt;
 var push_away_overlap_force := 25.0;
 
 var block_arc := 0.5; # 1 is no arc, -1 is full circle (based on dot product)
+var ammo_pool := 24;
 
 var is_attacking := false;
 var current_chain_anim := "";
@@ -149,8 +150,13 @@ func shoot_ranged() -> void:
 
 func reload_ranged() -> void:
 	if is_wep_ranged() && !blocks_preventing_attack() && can_wep_move():
-		if get_wep().reload():
-			WepAnims.play("dryfire");
+		if ammo_pool != 0:
+			match get_wep().reload():
+				0:
+					ammo_pool -= 1;
+					continue;
+				0, 1:
+					WepAnims.play("dryfire");
 
 func start_melee_attack() -> void:
 	if !blocks_preventing_attack():

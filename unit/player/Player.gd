@@ -3,19 +3,20 @@ extends Unit
 
 onready var cam_alive: Camera = $Head/Pitch/CameraAlive
 onready var cam_dead: Camera = $Head/CameraDead;
-var mouse_sensitivity: float = Settings.get_value("mouse_sensitivity");
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
 
 func _setup_weps() -> void:
 	Game.plr = self;
+	HUD.take_ammo_pool(ammo_pool);
 	._setup_weps();
 
 func _input(ev: InputEvent) -> void:
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		# Look
 		if ev is InputEventMouseMotion && Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			var mouse_sensitivity: float = Settings.get_value("look_sensitivity") * 0.0001;
 			head.rotate_y(-ev.relative.x * mouse_sensitivity);
 			pitch.rotate_x(-ev.relative.y * mouse_sensitivity);
 			pitch.rotation_degrees.x = clamp(pitch.rotation_degrees.x, -90, 90);
@@ -53,6 +54,10 @@ func die():
 	.die();
 	cam_dead.current = true;
 	$CleanUp.stop();
+
+func reload_ranged() -> void:
+	.reload_ranged();
+	HUD.take_ammo_pool(ammo_pool);
 
 func _process(delta: float) -> void:
 	if is_dead:

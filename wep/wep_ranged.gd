@@ -82,17 +82,18 @@ func fire() -> int:
 		return 1;
 	return 2;
 
-func reload() -> bool:
+func reload() -> int:
 	if reload_time_now <= 0:
 		reload_time_now = reload_time;
 		if ammo_now < mag_size:
 			ammo_now = min(ammo_now + reload_amt, mag_size);
 			AudioReload.play();
 			report_ammo_to_hud();
+			return 0;
 		else:
 			AudioReloadDone.play();
-		return true;
-	return false;
+			return 1;
+	return 2;
 
 func set_eyeline_adjust(a: bool) -> void:
 	if a:
