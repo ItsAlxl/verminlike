@@ -33,12 +33,20 @@ var chains := {
 			
 			"prep_type": "stab",
 		},
+		"swipe_right": {
+			"atk_extras": {
+				"max_hits": 1,
+			},
+		},
 		"swipe_left": {
 			"light": "swipe_right",
 			"heavy": "stab_left",
 			
 			"end_side": "left",
 			"prep_type": "stab",
+			"atk_extras": {
+				"max_hits": 1,
+			},
 		},
 		"stab_right": {
 			"light": "swipe_left",

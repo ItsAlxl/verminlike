@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://hud/elements/health/progress.png" type="Texture" id=1]
+[ext_resource path="res://hud/elements/health/background.png" type="Texture" id=2]
+[ext_resource path="res://hud/elements/health/additive.png" type="Texture" id=3]
+[ext_resource path="res://hud/elements/health/foreground.png" type="Texture" id=4]
+[ext_resource path="res://hud/elements/health/healthbar.gd" type="Script" id=5]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[node name="HealthBar" type="Control"]
+margin_right = 500.0
+margin_bottom = 43.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Progress" type="TextureProgress" parent="."]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture_progress = ExtResource( 1 )
+tint_progress = Color( 0, 1, 1, 1 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Additive" type="TextureRect" parent="."]
+self_modulate = Color( 1, 1, 1, 0.317647 )
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Metal" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

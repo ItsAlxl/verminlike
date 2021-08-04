@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://hud/HUD.gd" type="Script" id=1]
 [ext_resource path="res://hud/elements/revolver_ammo/revolver_ammo_indicator.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://menu/hammer.png" type="Texture" id=5]
 [ext_resource path="res://hud/default_theme.tres" type="Theme" id=6]
 [ext_resource path="res://hud/elements/ammo_pool/ammo_pool.tscn" type="PackedScene" id=7]
+[ext_resource path="res://hud/elements/health/healthbar.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "hammi"
@@ -146,6 +147,16 @@ margin_left = -0.354858
 margin_top = -0.373535
 margin_right = 109.645
 margin_bottom = 115.626
+
+[node name="HealthBar" parent="InGameHUD" instance=ExtResource( 8 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -312.0
+margin_top = -64.0
+margin_right = 313.0
+margin_bottom = -25.0
 
 [node name="InGameOpts" type="Control" parent="."]
 visible = false

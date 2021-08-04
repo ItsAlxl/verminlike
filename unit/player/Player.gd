@@ -10,6 +10,7 @@ func _ready() -> void:
 func _setup_weps() -> void:
 	Game.plr = self;
 	HUD.take_ammo_pool(ammo_pool);
+	HUD.take_hp(hp_now, hp_max);
 	._setup_weps();
 
 func _input(ev: InputEvent) -> void:
@@ -55,6 +56,9 @@ func die():
 	cam_dead.current = true;
 	$CleanUp.stop();
 
+func take_dmg(dmg: float) -> void:
+	.take_dmg(dmg);
+	HUD.take_hp(hp_now, hp_max);
 func reload_ranged() -> void:
 	.reload_ranged();
 	HUD.take_ammo_pool(ammo_pool);

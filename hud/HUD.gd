@@ -17,6 +17,9 @@ func take_ammo(at: int, of: int) -> void:
 func take_ammo_pool(ap: int) -> void:
 	$InGameHUD/Ammo/InvertPool/AmmoPool.set_num_bullets(ap);
 
+func take_hp(at: float, of: float) -> void:
+	$InGameHUD/HealthBar.set_hp(at, of);
+
 func _input(ev: InputEvent) -> void:
 	if ighud_enabled:
 		# Capture/release mouse

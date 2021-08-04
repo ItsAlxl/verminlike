@@ -86,11 +86,10 @@ func _ready() -> void:
 	
 	head.rotation.y = rotation.y;
 	rotation.y = 0;
+	hp_now = hp_max;
+	set_lpc_anim("IDLE");
 	
 	_setup_weps();
-	
-	set_lpc_anim("IDLE");
-	hp_now = hp_max;
 
 func _setup_weps() -> void:
 	get_wep().setup(self);
