@@ -55,6 +55,7 @@ func die():
 	.die();
 	cam_dead.current = true;
 	$CleanUp.stop();
+	HUD.take_final_state("died");
 
 func take_dmg(dmg: float) -> void:
 	.take_dmg(dmg);

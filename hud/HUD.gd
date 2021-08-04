@@ -20,6 +20,10 @@ func take_ammo_pool(ap: int) -> void:
 func take_hp(at: float, of: float) -> void:
 	$InGameHUD/HealthBar.set_hp(at, of);
 
+func take_final_state(state: String) -> void:
+	$InGameHUD/LblYouHave.visible = !state.empty();
+	$InGameHUD/LblYouHave.text = "You have " + state + "!";
+
 func _input(ev: InputEvent) -> void:
 	if ighud_enabled:
 		# Capture/release mouse
@@ -31,9 +35,11 @@ func show_ingame_opts(s: bool) -> void:
 	$InGameOpts.visible = s;
 	$InGameHUD.visible = !s;
 	
+	if !ighud_enabled:
+		s = !s;
 	if s:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE);
-	elif ighud_enabled:
+	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
 
 func _on_BtnResume_pressed():

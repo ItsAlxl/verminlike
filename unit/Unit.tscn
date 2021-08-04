@@ -1115,6 +1115,7 @@ process_material = SubResource( 23 )
 draw_pass_1 = SubResource( 24 )
 
 [node name="CleanUp" type="AnimationPlayer" parent="."]
+playback_speed = 4.0
 anims/cleanup = SubResource( 25 )
 
 [connection signal="animation_finished" from="animWeps" to="." method="_on_animWeps_animation_finished"]

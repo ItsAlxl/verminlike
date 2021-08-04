@@ -7,7 +7,7 @@ func _ready() -> void:
 	Game.level = self;
 	HUD.enable(true);
 
-func add_mob(at_transl: Vector3, limit_after := true) -> void:
+func add_mob(at_transl: Vector3, limit_after := true, aggro := false) -> void:
 	var at_cap := all_mobs.size() >= MAX_MOBS;
 	
 	if at_cap && !limit_after:
@@ -17,6 +17,8 @@ func add_mob(at_transl: Vector3, limit_after := true) -> void:
 	add_child(m);
 	m.global_transform.origin = at_transl;
 	all_mobs.append(m);
+	if aggro:
+		m.spread_aggro();
 	
 	if at_cap && limit_after:
 		_rem_furthest_mob();
@@ -41,3 +43,11 @@ func _rem_furthest_mob() -> void:
 func clear_all_mobs() -> void:
 	for m in all_mobs.duplicate():
 		rem_mob(m);
+
+func _on_EndArea_body_entered(body: PhysicsBody) -> void:
+	if body == Game.plr:
+		$EndLvlTimer.start();
+		HUD.take_final_state("won");
+
+func _on_EndLvlTimer_timeout():
+	HUD.change_scene("menu");

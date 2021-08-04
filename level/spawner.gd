@@ -5,6 +5,7 @@ export var spawn_per_timer := 1.0;
 export var dist_sq_to_plr := 500.0;
 export var spread := Vector2(0, 0);
 export var initial := 0;
+export var start_aggro := false;
 
 var enabled := false;
 var met_dist_req := false;
@@ -29,7 +30,7 @@ func spawn(limit_after := false) -> void:
 	else:
 		place += global_transform.origin;
 	
-	Game.level.add_mob(place, limit_after);
+	Game.level.add_mob(place, limit_after, start_aggro);
 
 func enable(en: bool) -> void:
 	if en != enabled:
