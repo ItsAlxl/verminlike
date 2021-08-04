@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://menu/hammer.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://hud/fonts/huge_text.tres" type="DynamicFont" id=4]
 [ext_resource path="res://hud/fonts/big_text.tres" type="DynamicFont" id=5]
 [ext_resource path="res://hud/default_theme.tres" type="Theme" id=6]
+[ext_resource path="res://unit/lpc/LPCLeader.gd" type="Script" id=7]
+[ext_resource path="res://unit/lpc/base/masc_human.png" type="Texture" id=8]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -17,6 +19,7 @@ __meta__ = {
 }
 
 [node name="Main" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -162,6 +165,134 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Equip" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scroll" type="ScrollContainer" parent="Equip"]
+anchor_bottom = 1.0
+margin_left = 241.0
+margin_right = 718.0
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxLPCOpts" type="VBoxContainer" parent="Equip/Scroll"]
+margin_right = 477.0
+margin_bottom = 900.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 15
+alignment = 1
+
+[node name="LPCLeader" type="Control" parent="Equip"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -425.519
+margin_top = 227.743
+margin_right = -425.519
+margin_bottom = 227.743
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="base" type="Sprite" parent="Equip/LPCLeader"]
+scale = Vector2( 5, 5 )
+texture = ExtResource( 8 )
+hframes = 13
+vframes = 21
+
+[node name="shoes" type="Sprite" parent="Equip/LPCLeader"]
+scale = Vector2( 5, 5 )
+hframes = 13
+vframes = 21
+
+[node name="legs" type="Sprite" parent="Equip/LPCLeader"]
+scale = Vector2( 5, 5 )
+hframes = 13
+vframes = 21
+
+[node name="tops" type="Sprite" parent="Equip/LPCLeader"]
+scale = Vector2( 5, 5 )
+hframes = 13
+vframes = 21
+
+[node name="belts" type="Sprite" parent="Equip/LPCLeader"]
+scale = Vector2( 5, 5 )
+hframes = 13
+vframes = 21
+
+[node name="hats" type="Sprite" parent="Equip/LPCLeader"]
+scale = Vector2( 5, 5 )
+hframes = 13
+vframes = 21
+
+[node name="gloves" type="Sprite" parent="Equip/LPCLeader"]
+scale = Vector2( 5, 5 )
+hframes = 13
+vframes = 21
+
+[node name="LPCAutoAdvance" type="Timer" parent="Equip"]
+wait_time = 0.15
+
+[node name="LPCAutoRotate" type="Timer" parent="Equip"]
+wait_time = 3.0
+
+[node name="VBoxWep" type="VBoxContainer" parent="Equip"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -604.895
+margin_top = -328.0
+margin_right = -251.895
+custom_constants/separation = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LblWep" type="Label" parent="Equip/VBoxWep"]
+margin_right = 353.0
+margin_bottom = 30.0
+text = "Melee Weapon"
+
+[node name="ComboxWep" type="OptionButton" parent="Equip/VBoxWep"]
+margin_top = 45.0
+margin_right = 353.0
+margin_bottom = 81.0
+text = "Hammer"
+items = [ "Hammer", null, false, 0, null, "Spear", null, false, 1, null, "Sword", null, false, 2, null ]
+selected = 0
+
+[node name="HSeparator" type="HSeparator" parent="Equip/VBoxWep"]
+margin_top = 96.0
+margin_right = 353.0
+margin_bottom = 100.0
+
+[node name="BtnGo" type="Button" parent="Equip/VBoxWep"]
+margin_top = 115.0
+margin_right = 353.0
+margin_bottom = 151.0
+text = "Play"
+
+[node name="HSeparator2" type="HSeparator" parent="Equip/VBoxWep"]
+margin_top = 166.0
+margin_right = 353.0
+margin_bottom = 170.0
+
+[node name="BtnBack" type="Button" parent="Equip/VBoxWep"]
+margin_top = 185.0
+margin_right = 353.0
+margin_bottom = 221.0
+text = "Back to Main Menu"
+
 [connection signal="meta_clicked" from="Main/RTLCredits" to="." method="_on_RTLCredits_meta_clicked"]
 [connection signal="pressed" from="Main/VBoxMenu/BtnPlay" to="." method="_on_BtnPlay_pressed"]
 [connection signal="pressed" from="Main/VBoxMenu/BtnDbg" to="." method="_on_BtnDbg_pressed"]
@@ -169,3 +300,7 @@ __meta__ = {
 [connection signal="value_changed" from="Main/VBoxMenu/SliderVol" to="." method="_on_SliderVol_value_changed"]
 [connection signal="toggled" from="Main/VBoxMenu/BtnCredits" to="." method="_on_BtnCredits_toggled"]
 [connection signal="pressed" from="Main/VBoxMenu/BtnQuit" to="." method="_on_BtnQuit_pressed"]
+[connection signal="timeout" from="Equip/LPCAutoAdvance" to="." method="_on_LPCAutoAdvance_timeout"]
+[connection signal="timeout" from="Equip/LPCAutoRotate" to="." method="_on_LPCAutoRotate_timeout"]
+[connection signal="pressed" from="Equip/VBoxWep/BtnGo" to="." method="_on_BtnGo_pressed"]
+[connection signal="pressed" from="Equip/VBoxWep/BtnBack" to="." method="_on_BtnBack_pressed"]

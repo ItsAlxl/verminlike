@@ -5,8 +5,6 @@ var chains := {
 		"": {
 			"light": "bash_down",
 			"heavy": "swipe_left",
-			
-			#"end_side": "right",
 		},
 		"swipe_left": {
 			"heavy": "swipe_right",
@@ -109,19 +107,21 @@ var chains := {
 			},
 		},
 		"bash_down": {
-			"heavy": "uppercut",
+			"light": "uppercut",
+			"heavy": "stab_right",
 			
+			"prep_type": "stab",
 			"atk_extras": {
 				"dmg": 5,
 			},
 		},
 		"uppercut": {
-			"heavy": "stab_right",
+			"light": "swipe_left",
+			"heavy": "bash_down",
 			
-			"prep_type": "stab",
 			"atk_extras": {
-				"knockback": Vector2(1, 6),
-				"dmg": 5,
+				"knockback": Vector2(1, 4),
+				"dmg": -5,
 			},
 		},
 	},

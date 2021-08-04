@@ -4,8 +4,6 @@ extends Unit
 const DESPAWN_DIST_SQ := pow(350.0, 2);
 const SLEEP_DIST_SQ := pow(100.0, 2);
 
-signal gained_aggro();
-
 var to_plr := Vector3.ZERO;
 var to_plr_norm := Vector3.ZERO;
 var dist_sq_to_plr := -1.0;
@@ -24,6 +22,10 @@ func _cleanup() -> void:
 
 func _ready() -> void:
 	Game.request_lpc_combo(self, "_take_lpc_combo", Game.get_random_lpc_options());
+
+func _setup_weps() -> void:
+	WepHand.add_child(Game.get_random_wep_pscene().instance());
+	._setup_weps();
 
 func _physics_process(delta: float) -> void:
 	to_plr = Game.plr.translation - translation;
@@ -85,10 +87,11 @@ func take_atk(dmg: float, knockback: Vector2, attacker: Unit, extras := {}) -> b
 	return .take_atk(dmg, knockback, attacker, extras);
 
 func spread_aggro() -> void:
-	if !sleeping && !is_dead:
-		if is_alive() && !is_aggro:
-			is_aggro = true;
-			emit_signal("gained_aggro");
+	if !sleeping && !is_dead && is_alive() && !is_aggro:
+		is_aggro = true;
+		for body in $Head/AggroBubble.get_overlapping_bodies():
+			if body.has_method("spread_aggro"):
+				body.spread_aggro();
 
 func get_unstunned_movt() -> Vector3:
 	if is_aggro_to_plr():
@@ -109,12 +112,3 @@ func _on_AggroBubble_body_entered(body: PhysicsBody) -> void:
 		if body.has_method("spread_aggro"):
 			if body.is_aggro_to_plr():
 				spread_aggro();
-			else:
-				if !body.is_connected("gained_aggro", self, "spread_aggro"):
-					body.connect("gained_aggro", self, "spread_aggro");
-
-func _on_AggroBubble_body_exited(body: PhysicsBody) -> void:
-	if !sleeping && !is_dead:
-		if body.has_method("spread_aggro"):
-			if body.is_connected("gained_aggro", self, "spread_aggro"):
-				body.disconnect("gained_aggro", self, "spread_aggro");

@@ -1,4 +1,4 @@
-extends Spatial
+extends Node
 
 const IDX_MAP := {
 	"CAST": 0,
@@ -35,13 +35,13 @@ func _upd_children_y() -> void:
 	set_flip_h(_corrected_fliph);
 	
 	for c in get_children():
-		if c is Sprite3D:
+		if c is Sprite3D or c is Sprite:
 			c.frame_coords.y = frame_y;
 
 func set_frame_x(fx: int) -> void:
 	frame_x = fx;
 	for c in get_children():
-		if c is Sprite3D:
+		if c is Sprite3D or c is Sprite:
 			c.frame_coords.x = fx;
 func get_frame_x() -> int:
 	return frame_x;

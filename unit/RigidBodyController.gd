@@ -65,7 +65,7 @@ func _physics_process(_delta: float) -> void:
 	### Groundedness raycasts
 		# Define raycast info used with detecting groundedness
 		var raycast_list := []; # List of raycasts used with detecting groundedness
-		var bottom := 0.5; # Distance down from start to fire the raycast to
+		var bottom := 0.25; # Distance down from start to fire the raycast to
 		var start: float = (capsule.height/2 + capsule.radius)-0.05; # Start point down from the center of the player to start the raycast
 		var cv_dist: float = capsule.radius-0.1; # Cardinal vector distance. Added to 2 cardinal vectors to result in a diagonal with the same magnitude of the cardinal vectors
 		var ov_dist := cv_dist/sqrt(2); # Ordinal vector distance. 
@@ -177,9 +177,9 @@ func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	### Dodging
 		var move := get_movt_vect(); # Get movement vector relative to player orientation
 		
-		if should_dodge && is_grounded:
+		if should_dodge:
 			should_dodge = false;
-			if dodge_cd_now <= 0.0:
+			if is_grounded && dodge_cd_now <= 0.0:
 				dodge_cd_now = dodge_cd;
 				state.apply_central_impulse(move * dodge);
 

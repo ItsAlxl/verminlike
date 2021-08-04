@@ -1,10 +1,9 @@
 extends Node
 
-const MAX_LPC_THREADS := 10;
-const LPC_ORDER := ["base", "shoes", "legs", "tops", "belts", "hats", "gloves"];
+const MAX_LPC_THREADS := 5;
+const LPC_ORDER := ["shoes", "legs", "tops", "belts", "hats", "gloves"];
 const LPC_IMPORT_FLAGS := 0;
 var lpc_options := {
-	"base": {"base": preload("res://unit/lpc/base/masc_human.png")},
 	"belts": {},
 	"gloves": {},
 	"hats": {},
@@ -15,6 +14,12 @@ var lpc_options := {
 var _lpc_request_queue := [];
 var _lpc_threads := [];
 var _lpc_queue_mutex := Mutex.new();
+
+const wep_options := {
+	"sword": preload("res://wep/sword/Sword.tscn"),
+	"hammer": preload("res://wep/hammer/hammer.tscn"),
+	"spear": preload("res://wep/spear/Spear.tscn"),
+};
 
 var plr: Player;
 var level: Spatial;
@@ -27,9 +32,15 @@ func _ready() -> void:
 		t.start(self, "_check_lpc_req_queue", _lpc_queue_mutex);
 		_lpc_threads.append(t);
 
+func get_random_wep_pscene() -> PackedScene:
+	var keys := wep_options.keys();
+	return wep_options[keys[randi() % keys.size()]];
+
+func get_wep_pscene(wep: String) -> PackedScene:
+	return wep_options.get(wep);
+
 const LPC_ART_DIR := "res://unit/lpc/";
 func get_lpc_options(category: String) -> Dictionary:
-	
 	if lpc_options[category].empty():
 		lpc_options[category]["none"] = null;
 		
@@ -70,7 +81,15 @@ func get_lpc_combo_texture(chosen_opts := {}) -> Texture:
 	return tex;
 
 func request_lpc_combo(cb_obj: Object, cb_func: String, opts: Dictionary) -> void:
-	_lpc_request_queue.append([cb_obj, cb_func, opts]);
+	var deserial := {};
+	for k in opts:
+		if opts[k] is String:
+			deserial[k] = get_lpc_tex(k, opts[k]);
+		elif opts[k] == null || opts[k] is Texture:
+			deserial[k] = opts[k];
+		else:
+			print("ERROR: attempt an LPC request with non-string, non-texture vals");
+	_lpc_request_queue.append([cb_obj, cb_func, deserial]);
 
 func _check_lpc_req_queue(mutex: Mutex) -> void:
 	while true:
@@ -85,3 +104,11 @@ func _check_lpc_req_queue(mutex: Mutex) -> void:
 
 func _perf_lpc_request(req: Array) -> void:
 	req[0].call(req[1], get_lpc_combo_texture(req[2]));
+
+func quit() -> void:
+	Settings.save();
+	get_tree().quit();
+
+func _notification(what: int) -> void:
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		quit();

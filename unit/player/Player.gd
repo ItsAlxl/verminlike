@@ -6,9 +6,11 @@ onready var cam_dead: Camera = $Head/CameraDead;
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
+	Game.request_lpc_combo(self, "_take_lpc_combo", Settings.get_value("lpc_opts"));
 
 func _setup_weps() -> void:
 	Game.plr = self;
+	WepHand.add_child(Game.get_wep_pscene(Settings.get_value("mwep")).instance());
 	HUD.take_ammo_pool(ammo_pool);
 	HUD.take_hp(hp_now, hp_max);
 	._setup_weps();

@@ -64,7 +64,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.425, 0.6 ),
+"times": PoolRealArray( 0, 0.3, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [ false ],
@@ -1046,7 +1046,7 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.60409
 visible = false
 
 [node name="wep" type="Spatial" parent="Head/Pitch"]
-transform = Transform( -4.37114e-08, 0, -1, 0, 0.999999, 0, 1, 0, -4.37114e-08, 0.604098, -0.435852, -0.496375 )
+transform = Transform( -5.1274e-08, -6.11783e-09, -1, -0.628927, 0.777464, 2.74912e-08, 0.777464, 0.628926, -4.37114e-08, 0, 0.497071, -0.395724 )
 script = ExtResource( 10 )
 
 [node name="DBGHammer" parent="Head/Pitch/wep" instance=ExtResource( 4 )]

@@ -9,6 +9,7 @@ func enable(e: bool) -> void:
 	ighud_enabled = e;
 	show_ingame_opts(false);
 	$InGameHUD.visible = e;
+	take_final_state("");
 
 func take_ammo(at: int, of: int) -> void:
 	$InGameHUD/Ammo/RevolverAmmo.set_max(of);
@@ -64,7 +65,7 @@ func _on_BtnMainMenu_pressed():
 	change_scene("menu");
 
 func _on_BtnQuit_pressed():
-	get_tree().quit();
+	Game.quit();
 
 # Scene transition
 
@@ -92,6 +93,7 @@ func change_scene_path(scene_path: String, cb := "", args := []) -> void:
 func _perf_transit() -> void: # Called in animation
 # warning-ignore:return_value_discarded
 	transit_loader = ResourceLoader.load_interactive(transit_info["scene_path"]);
+	get_tree().get_current_scene().queue_free();
 	get_tree().paused = true;
 	set_process(true);
 

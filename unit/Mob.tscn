@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://unit/Unit.tscn" type="PackedScene" id=1]
-[ext_resource path="res://wep/spear/Spear.tscn" type="PackedScene" id=2]
 [ext_resource path="res://unit/Mob.gd" type="Script" id=3]
 
 [sub_resource type="CylinderShape" id=1]
@@ -10,10 +9,8 @@ height = 3.0
 
 [node name="Mob" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-speed_limit = 6.5
+speed_limit = 7.0
 hp_max = 30.0
-
-[node name="Spear" parent="Head/Pitch/wep" index="3" instance=ExtResource( 2 )]
 
 [node name="AggroBubble" type="Area" parent="Head" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.753756, 0 )
@@ -26,7 +23,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0240026, -3.44347 )
 shape = SubResource( 1 )
 
 [node name="animWeps" parent="." index="3"]
-playback_speed = 0.66
+playback_speed = 0.6
 
 [connection signal="body_entered" from="Head/AggroBubble" to="." method="_on_AggroBubble_body_entered"]
-[connection signal="body_exited" from="Head/AggroBubble" to="." method="_on_AggroBubble_body_exited"]
