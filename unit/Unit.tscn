@@ -64,7 +64,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.45, 0.6 ),
+"times": PoolRealArray( 0, 0.425, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [ false ],
@@ -982,7 +982,7 @@ rings = 8
 length = 60.0
 step = 1.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("LPCLeader/Base:offset")
+tracks/0/path = NodePath("LPCLeader/lpc:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -994,7 +994,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -50 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("LPCLeader/Base:modulate")
+tracks/1/path = NodePath("LPCLeader/lpc:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1061,7 +1061,7 @@ visible = false
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.249311, 0 )
 script = ExtResource( 7 )
 
-[node name="Base" type="Sprite3D" parent="LPCLeader"]
+[node name="lpc" type="Sprite3D" parent="LPCLeader"]
 pixel_size = 0.05
 billboard = 2
 shaded = true

@@ -1,6 +1,6 @@
 extends Control
 
-onready var RTLCredits := $RTLCredits;
+onready var RTLCredits := $Main/RTLCredits;
 
 func _ready():
 	HUD.enable(false);
@@ -22,19 +22,19 @@ func _ready():
 	f.close();
 	
 	HUD.change_vol(Settings.get_value("master_vol"));
-	$VBoxMenu/SliderVol.value = Settings.get_value("master_vol");
-	$VBoxMenu/LblVol/NUDVol.value = Settings.get_value("master_vol");
+	$Main/VBoxMenu/SliderVol.value = Settings.get_value("master_vol");
+	$Main/VBoxMenu/LblVol/NUDVol.value = Settings.get_value("master_vol");
 
 func _on_BtnCredits_toggled(t: bool) -> void:
 	RTLCredits.visible = t;
-	$Logo.visible = !t;
+	$Main/Logo.visible = !t;
 
 func _on_NUDVol_value_changed(val: float):
-	$VBoxMenu/SliderVol.value = val;
+	$Main/VBoxMenu/SliderVol.value = val;
 	HUD.change_vol(val);
 
 func _on_SliderVol_value_changed(val: float):
-	$VBoxMenu/LblVol/NUDVol.value = val;
+	$Main/VBoxMenu/LblVol/NUDVol.value = val;
 	HUD.change_vol(val);
 
 func _on_RTLCredits_meta_clicked(meta):

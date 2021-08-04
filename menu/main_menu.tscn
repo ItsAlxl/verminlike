@@ -16,7 +16,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RTLCredits" type="RichTextLabel" parent="."]
+[node name="Main" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RTLCredits" type="RichTextLabel" parent="Main"]
 visible = false
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -29,7 +36,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxMenu" type="VBoxContainer" parent="."]
+[node name="VBoxMenu" type="VBoxContainer" parent="Main"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -37,35 +44,35 @@ anchor_bottom = 0.5
 margin_left = -412.782
 margin_top = -141.0
 margin_right = -77.7817
-margin_bottom = 141.0
+margin_bottom = 221.0
 custom_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BtnPlay" type="Button" parent="VBoxMenu"]
+[node name="BtnPlay" type="Button" parent="Main/VBoxMenu"]
 margin_right = 335.0
 margin_bottom = 36.0
 text = "Begin"
 
-[node name="BtnDbg" type="Button" parent="VBoxMenu"]
+[node name="BtnDbg" type="Button" parent="Main/VBoxMenu"]
 margin_top = 56.0
 margin_right = 335.0
 margin_bottom = 92.0
 text = "Test Level"
 
-[node name="HSeparator" type="HSeparator" parent="VBoxMenu"]
+[node name="HSeparator" type="HSeparator" parent="Main/VBoxMenu"]
 margin_top = 112.0
 margin_right = 335.0
 margin_bottom = 116.0
 
-[node name="LblVol" type="Label" parent="VBoxMenu"]
+[node name="LblVol" type="Label" parent="Main/VBoxMenu"]
 margin_top = 136.0
 margin_right = 335.0
 margin_bottom = 166.0
 text = "Master Volume"
 
-[node name="NUDVol" type="SpinBox" parent="VBoxMenu/LblVol"]
+[node name="NUDVol" type="SpinBox" parent="Main/VBoxMenu/LblVol"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -79,7 +86,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SliderVol" type="HSlider" parent="VBoxMenu"]
+[node name="SliderVol" type="HSlider" parent="Main/VBoxMenu"]
 margin_top = 186.0
 margin_right = 335.0
 margin_bottom = 202.0
@@ -87,24 +94,24 @@ value = 75.0
 tick_count = 6
 ticks_on_borders = true
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxMenu"]
+[node name="HSeparator2" type="HSeparator" parent="Main/VBoxMenu"]
 margin_top = 222.0
 margin_right = 335.0
 margin_bottom = 226.0
 
-[node name="BtnCredits" type="Button" parent="VBoxMenu"]
+[node name="BtnCredits" type="Button" parent="Main/VBoxMenu"]
 margin_top = 246.0
 margin_right = 335.0
 margin_bottom = 282.0
 toggle_mode = true
 text = "Credits"
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxMenu"]
+[node name="HSeparator3" type="HSeparator" parent="Main/VBoxMenu"]
 margin_top = 302.0
 margin_right = 335.0
 margin_bottom = 306.0
 
-[node name="BtnQuit" type="Button" parent="VBoxMenu"]
+[node name="BtnQuit" type="Button" parent="Main/VBoxMenu"]
 margin_top = 326.0
 margin_right = 335.0
 margin_bottom = 362.0
@@ -113,7 +120,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Logo" type="Label" parent="."]
+[node name="Logo" type="Label" parent="Main"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 149.503
@@ -129,7 +136,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hammer" type="TextureRect" parent="Logo"]
+[node name="Hammer" type="TextureRect" parent="Main/Logo"]
 show_behind_parent = true
 margin_left = 127.356
 margin_top = -82.4069
@@ -141,7 +148,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="byalxl" type="Label" parent="Logo"]
+[node name="byalxl" type="Label" parent="Main/Logo"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -155,10 +162,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="meta_clicked" from="RTLCredits" to="." method="_on_RTLCredits_meta_clicked"]
-[connection signal="pressed" from="VBoxMenu/BtnPlay" to="." method="_on_BtnPlay_pressed"]
-[connection signal="pressed" from="VBoxMenu/BtnDbg" to="." method="_on_BtnDbg_pressed"]
-[connection signal="value_changed" from="VBoxMenu/LblVol/NUDVol" to="." method="_on_NUDVol_value_changed"]
-[connection signal="value_changed" from="VBoxMenu/SliderVol" to="." method="_on_SliderVol_value_changed"]
-[connection signal="toggled" from="VBoxMenu/BtnCredits" to="." method="_on_BtnCredits_toggled"]
-[connection signal="pressed" from="VBoxMenu/BtnQuit" to="." method="_on_BtnQuit_pressed"]
+[connection signal="meta_clicked" from="Main/RTLCredits" to="." method="_on_RTLCredits_meta_clicked"]
+[connection signal="pressed" from="Main/VBoxMenu/BtnPlay" to="." method="_on_BtnPlay_pressed"]
+[connection signal="pressed" from="Main/VBoxMenu/BtnDbg" to="." method="_on_BtnDbg_pressed"]
+[connection signal="value_changed" from="Main/VBoxMenu/LblVol/NUDVol" to="." method="_on_NUDVol_value_changed"]
+[connection signal="value_changed" from="Main/VBoxMenu/SliderVol" to="." method="_on_SliderVol_value_changed"]
+[connection signal="toggled" from="Main/VBoxMenu/BtnCredits" to="." method="_on_BtnCredits_toggled"]
+[connection signal="pressed" from="Main/VBoxMenu/BtnQuit" to="." method="_on_BtnQuit_pressed"]

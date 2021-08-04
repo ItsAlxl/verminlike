@@ -201,6 +201,9 @@ func set_is_blocking(b: bool) -> void:
 	if b:
 		block_start_time = OS.get_ticks_msec();
 
+func _take_lpc_combo(tex: Texture) -> void:
+	LPCLeader.get_child(0).texture = tex;
+
 func start_block() -> void:
 	if _queue_unblock:
 		_queue_unblock = false;

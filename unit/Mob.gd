@@ -19,8 +19,11 @@ var is_aggro := false;
 var roam_attention := 0.0;
 var roam_move := false;
 
-func _cleanup():
+func _cleanup() -> void:
 	Game.level.rem_mob(self);
+
+func _ready() -> void:
+	Game.request_lpc_combo(self, "_take_lpc_combo", Game.get_random_lpc_options());
 
 func _physics_process(delta: float) -> void:
 	to_plr = Game.plr.translation - translation;
