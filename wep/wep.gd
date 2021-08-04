@@ -3,6 +3,7 @@ extends Spatial
 
 onready var HitArea: Area = $HitArea;
 onready var AudioHit := $AudioHit;
+onready var AudioBlock := $AudioBlock;
 
 export var dmg := 0.0;
 export var knockback := Vector2(0.0, 0.0);
@@ -37,5 +38,10 @@ func get_atk_extras() -> Dictionary:
 func _on_HitArea_body_entered(_body: PhysicsBody) -> void:
 	pass;
 
-func atk_unit(u: Unit) -> void:
-	u.take_atk(dmg, knockback, unit_owner, get_atk_extras());
+func atk_unit(u: Unit) -> bool:
+	return u.take_atk(dmg, knockback, unit_owner, get_atk_extras());
+
+func anim_block() -> void:
+	$AnimBlock.stop(true);
+	$AnimBlock.play("block_plink");
+	$AudioBlock.play();

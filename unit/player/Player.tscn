@@ -3,7 +3,7 @@
 [ext_resource path="res://unit/Unit.tscn" type="PackedScene" id=1]
 [ext_resource path="res://unit/player/Player.gd" type="Script" id=2]
 [ext_resource path="res://wep/revolver/revolver.tscn" type="PackedScene" id=3]
-[ext_resource path="res://wep/spear/Spear.tscn" type="PackedScene" id=4]
+[ext_resource path="res://wep/sword/Sword.tscn" type="PackedScene" id=4]
 
 [node name="Player" instance=ExtResource( 1 )]
 collision_layer = 2
@@ -25,7 +25,7 @@ far = 350.0
 [node name="wep" parent="Head/Pitch" index="2"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.604098, -0.435852, -0.496375 )
 
-[node name="Spear" parent="Head/Pitch/wep" index="3" instance=ExtResource( 4 )]
+[node name="Sword" parent="Head/Pitch/wep" index="3" instance=ExtResource( 4 )]
 
 [node name="CameraDead" type="Camera" parent="Head" index="1"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.079, -2.229 )

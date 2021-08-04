@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/metal_click.ogg-615c4f56147f49cc9a8203aa7e69a360.oggstr"
+
+[deps]
+
+source_file="res://wep/sounds/gun/metal_click.ogg"
+dest_files=[ "res://.import/metal_click.ogg-615c4f56147f49cc9a8203aa7e69a360.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

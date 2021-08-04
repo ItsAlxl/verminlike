@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/blunt3.ogg-d38ab03f91af3d9f0468ecc0a059e4db.oggstr"
+
+[deps]
+
+source_file="res://wep/sounds/hits/blunt3.ogg"
+dest_files=[ "res://.import/blunt3.ogg-d38ab03f91af3d9f0468ecc0a059e4db.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

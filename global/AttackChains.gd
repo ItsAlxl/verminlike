@@ -6,7 +6,7 @@ var chains := {
 			"light": "bash_down",
 			"heavy": "swipe_left",
 			
-			"end_side": "right",
+			#"end_side": "right",
 		},
 		"swipe_left": {
 			"heavy": "swipe_right",
@@ -67,6 +67,61 @@ var chains := {
 			"prep_type": "stab",
 			"atk_extras": {
 				"dmg": 8,
+			},
+		},
+	},
+	"sword": {
+		"": {
+			"light": "swipe_left",
+			"heavy": "bash_down",
+		},
+		"swipe_left": {
+			"light": "swipe_right",
+			"heavy": "stab_left",
+			
+			"end_side": "left",
+			"prep_type": "stab",
+		},
+		"swipe_right": {
+			"light": "swipe_left",
+			"heavy": "stab_right",
+			"prep_type": "stab",
+		},
+		"stab_right": {
+			"light": "swipe_right",
+			"heavy": "stab_left",
+			
+			"end_side": "left",
+			"prep_type": "stab",
+			"atk_extras": {
+				"max_hits": 1,
+				"dmg": 8,
+			},
+		},
+		"stab_left": {
+			"light": "swipe_left",
+			"heavy": "stab_right",
+			
+			"prep_type": "stab",
+			"atk_extras": {
+				"max_hits": 1,
+				"dmg": 8,
+			},
+		},
+		"bash_down": {
+			"heavy": "uppercut",
+			
+			"atk_extras": {
+				"dmg": 5,
+			},
+		},
+		"uppercut": {
+			"heavy": "stab_right",
+			
+			"prep_type": "stab",
+			"atk_extras": {
+				"knockback": Vector2(1, 6),
+				"dmg": 5,
 			},
 		},
 	},

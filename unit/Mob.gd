@@ -76,10 +76,10 @@ func _physics_process(delta: float) -> void:
 func is_aggro_to_plr() -> bool:
 	return !sleeping && is_aggro && is_alive() && Game.plr.is_alive();
 
-func take_atk(dmg: float, knockback: Vector2, attacker: Unit, extras := {}) -> void:
+func take_atk(dmg: float, knockback: Vector2, attacker: Unit, extras := {}) -> bool:
 	if attacker is Player:
 		spread_aggro();
-	.take_atk(dmg, knockback, attacker, extras);
+	return .take_atk(dmg, knockback, attacker, extras);
 
 func spread_aggro() -> void:
 	if !sleeping && !is_dead:

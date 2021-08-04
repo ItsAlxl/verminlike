@@ -238,16 +238,19 @@ func get_arc_cross(u: Unit) -> float:
 
 const BASE_COUNTER_STUN := 2.0;
 const BASE_COUNTER_KNOCKBACK := Vector2(3.0, 1.5);
-func take_atk(dmg: float, knockback: Vector2, attacker: Unit, extras := {}) -> void:
+func take_atk(dmg: float, knockback: Vector2, attacker: Unit, extras := {}) -> bool:
 	if is_blocking && get_arc_dot(attacker) >= block_arc:
 		if get_block_age() < 200:
 			attacker.take_knockback(BASE_COUNTER_KNOCKBACK + extras.get("counter_knockback", Vector2.ZERO), translation);
 			attacker.take_dmg(extras.get("counter_dmg", 0.0));
 			attacker.stun(BASE_COUNTER_STUN + extras.get("counter_stun", 0.0));
+		get_wep().anim_block();
+		return false;
 	else:
 		stun(stun_on_hit + extras.get("stun", 0.0));
 		take_dmg(dmg + extras.get("dmg", 0.0));
 		take_knockback(knockback + extras.get("knockback", Vector2.ZERO), attacker.translation);
+		return true;
 
 func take_dmg(dmg: float) -> void:
 	hp_now -= dmg;

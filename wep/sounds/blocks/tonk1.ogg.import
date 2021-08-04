@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/tonk1.ogg-c9a702c5ee3a08ee5ff3f68ce93809ec.oggstr"
+
+[deps]
+
+source_file="res://wep/sounds/blocks/tonk1.ogg"
+dest_files=[ "res://.import/tonk1.ogg-c9a702c5ee3a08ee5ff3f68ce93809ec.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

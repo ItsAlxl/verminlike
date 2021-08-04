@@ -12,11 +12,13 @@ func _init() -> void:
 func _on_HitArea_body_entered(body: PhysicsBody) -> void:
 	if body.has_method("take_atk") && !hit_so_far.has(body) && hit_so_far.size() < get_atk_extras().get("max_hits", INF):
 		hit_so_far.append(body);
-		atk_unit(body);
-		AudioHit.play();
+		if atk_unit(body):
+			AudioHit.play();
+		else:
+			AudioBlock.play();
 
 # it's for a hack :)
-const RESET_AREA_OVERLAP_OFFSET := Vector3(-100, -100, -100);
+const RESET_AREA_OVERLAP_OFFSET := -1000 * Vector3.ONE;
 func set_hits_active(a: bool) -> void:
 	HitArea.monitoring = a;
 	

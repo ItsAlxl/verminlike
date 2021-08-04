@@ -1,9 +1,9 @@
 class_name RangedWeapon
 extends Weapon
 
-onready var AudioDry = $MoveWithGun/AudioDry
-onready var AudioReload = $MoveWithGun/AudioReload;
-onready var AudioReloadDone = $MoveWithGun/AudioReloadDone;
+onready var AudioDry = $WepArt/AudioDry
+onready var AudioReload = $WepArt/AudioReload;
+onready var AudioReloadDone = $WepArt/AudioReloadDone;
 
 export var spread := Vector2(0.0, 0.0);
 export var fire_cd := 0.1;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://wep/base_wep.tscn" type="PackedScene" id=1]
 [ext_resource path="res://wep/wep_melee.gd" type="Script" id=2]
@@ -7,7 +7,9 @@
 [ext_resource path="res://materials/metal_brass.tres" type="Material" id=5]
 [ext_resource path="res://materials/metal_body.tres" type="Material" id=6]
 [ext_resource path="res://materials/wood_body.tres" type="Material" id=7]
-[ext_resource path="res://wep/sounds/deep_smack.ogg" type="AudioStream" id=8]
+[ext_resource path="res://wep/sounds/hits/blunt1.ogg" type="AudioStream" id=8]
+[ext_resource path="res://wep/sounds/hits/blunt3.ogg" type="AudioStream" id=9]
+[ext_resource path="res://wep/sounds/hits/blunt2.ogg" type="AudioStream" id=10]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.300082, 0.249136, 0.140098 )
@@ -18,7 +20,7 @@ dmg = 10.0
 knockback = Vector2( 6, 2 )
 attack_chain = "hammer"
 
-[node name="Mesh" type="MeshInstance" parent="." index="0"]
+[node name="Mesh" type="MeshInstance" parent="WepArt" index="0"]
 transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.0245909, 0 )
 mesh = ExtResource( 3 )
 material/0 = ExtResource( 6 )
@@ -32,4 +34,4 @@ shape = SubResource( 1 )
 
 [node name="AudioHit" parent="." index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.713645, 0 )
-sounds = [ ExtResource( 8 ) ]
+sounds = [ ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ) ]

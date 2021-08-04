@@ -7,13 +7,13 @@
 [ext_resource path="res://materials/metal_dark.tres" type="Material" id=5]
 [ext_resource path="res://wep/base_wep.tscn" type="PackedScene" id=6]
 [ext_resource path="res://wep/wep_ranged.gd" type="Script" id=7]
-[ext_resource path="res://wep/sounds/metal_click.ogg" type="AudioStream" id=8]
-[ext_resource path="res://wep/sounds/gunshot.ogg" type="AudioStream" id=9]
+[ext_resource path="res://wep/sounds/gun/metal_click.ogg" type="AudioStream" id=8]
+[ext_resource path="res://wep/sounds/gun/gunshot.ogg" type="AudioStream" id=9]
 [ext_resource path="res://polyphone/polyphone.tscn" type="PackedScene" id=10]
-[ext_resource path="res://wep/sounds/revolver_reload0.ogg" type="AudioStream" id=11]
-[ext_resource path="res://wep/sounds/revolver_spin.ogg" type="AudioStream" id=12]
-[ext_resource path="res://wep/sounds/revolver_reload1.ogg" type="AudioStream" id=13]
-[ext_resource path="res://wep/sounds/revolver_reload2.ogg" type="AudioStream" id=14]
+[ext_resource path="res://wep/sounds/gun/revolver_reload0.ogg" type="AudioStream" id=11]
+[ext_resource path="res://wep/sounds/gun/revolver_spin.ogg" type="AudioStream" id=12]
+[ext_resource path="res://wep/sounds/gun/revolver_reload1.ogg" type="AudioStream" id=13]
+[ext_resource path="res://wep/sounds/gun/revolver_reload2.ogg" type="AudioStream" id=14]
 [ext_resource path="res://materials/textures/smoke.png" type="Texture" id=15]
 
 [sub_resource type="RayShape" id=1]
@@ -90,7 +90,7 @@ tracks/0/keys = {
 } ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("MoveWithGun:translation")
+tracks/1/path = NodePath("WepArt:translation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -102,7 +102,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0.249439, 0.32714, 0 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("MoveWithGun:rotation_degrees")
+tracks/2/path = NodePath("WepArt:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -145,9 +145,7 @@ knockback = Vector2( 1, 0.5 )
 fire_cd = 0.75
 mag_size = 6
 
-[node name="MoveWithGun" type="Spatial" parent="." index="0"]
-
-[node name="Mesh" type="MeshInstance" parent="MoveWithGun" index="0"]
+[node name="Mesh" type="MeshInstance" parent="WepArt" index="0"]
 transform = Transform( -0.3, 0, 4.52987e-08, 0, 0.3, 0, -4.52987e-08, 0, -0.3, 0, 0, 0 )
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 2 )
@@ -155,17 +153,17 @@ material/1 = ExtResource( 3 )
 material/2 = ExtResource( 4 )
 material/3 = ExtResource( 5 )
 
-[node name="AudioDry" parent="MoveWithGun" index="1" instance=ExtResource( 10 )]
+[node name="AudioDry" parent="WepArt" index="1" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.113919, 0.0264679, 4.97955e-09 )
 sounds = [ ExtResource( 8 ) ]
 untether = false
 
-[node name="AudioReload" parent="MoveWithGun" index="2" instance=ExtResource( 10 )]
+[node name="AudioReload" parent="WepArt" index="2" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16551, 0.104135, 7.23467e-09 )
 sounds = [ ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ) ]
 untether = false
 
-[node name="AudioReloadDone" parent="MoveWithGun" index="3" instance=ExtResource( 10 )]
+[node name="AudioReloadDone" parent="WepArt" index="3" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17029, 0.0999144, 7.44361e-09 )
 sounds = [ ExtResource( 12 ) ]
 const_players = 1
@@ -180,12 +178,7 @@ monitoring = true
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="AudioHit" parent="." index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625727, 0.125869, 0.24279 )
-sounds = [ ExtResource( 9 ) ]
-untether = false
-
-[node name="ParticlesMuzzleFlash" type="Particles" parent="." index="3"]
+[node name="ParticlesMuzzleFlash" type="Particles" parent="." index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.613598, 0.122903, 0 )
 emitting = false
 amount = 50
@@ -197,7 +190,7 @@ draw_order = 2
 process_material = SubResource( 6 )
 draw_pass_1 = SubResource( 8 )
 
-[node name="MuzzleFlash" type="Spatial" parent="." index="4"]
+[node name="MuzzleFlash" type="Spatial" parent="." index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.613598, 0.122903, 0 )
 visible = false
 
@@ -205,7 +198,12 @@ visible = false
 light_color = Color( 1, 0.752941, 0.227451, 1 )
 omni_range = 10.0
 
-[node name="AnimGun" type="AnimationPlayer" parent="." index="5"]
+[node name="AnimGun" type="AnimationPlayer" parent="." index="4"]
 anims/recoil = SubResource( 9 )
+
+[node name="AudioHit" parent="." index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625727, 0.125869, 0.24279 )
+sounds = [ ExtResource( 9 ) ]
+untether = false
 
 [connection signal="body_exited" from="HitArea" to="." method="_on_HitArea_body_exited"]

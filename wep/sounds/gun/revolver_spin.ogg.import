@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/revolver_spin.ogg-e22316b54b51a1aa5dfbba2dae62d4ae.oggstr"
+
+[deps]
+
+source_file="res://wep/sounds/gun/revolver_spin.ogg"
+dest_files=[ "res://.import/revolver_spin.ogg-e22316b54b51a1aa5dfbba2dae62d4ae.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
