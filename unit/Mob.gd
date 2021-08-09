@@ -114,7 +114,7 @@ func get_nearest_wallavoid_raycast_to(angle: float) -> int:
 	var best_idx := -1;
 	for i in range(NUM_WALLAVOID_RAYCASTS):
 		var rc_cast: Vector3 = $AvoidWalls.get_child(i).cast_to;
-		var rc_angle_diff := posmod(angle - Vector2(rc_cast.x, rc_cast.z).angle(), TAU);
+		var rc_angle_diff := fposmod(angle - Vector2(rc_cast.x, rc_cast.z).angle(), TAU);
 		if rc_angle_diff < best_diff:
 			best_diff = rc_angle_diff;
 			best_idx = i;

@@ -86,7 +86,7 @@ func reload() -> int:
 	if reload_time_now <= 0:
 		reload_time_now = reload_time;
 		if ammo_now < mag_size:
-			ammo_now = min(ammo_now + reload_amt, mag_size);
+			ammo_now = int(min(ammo_now + reload_amt, mag_size));
 			AudioReload.play();
 			report_ammo_to_hud();
 			return 0;
@@ -119,7 +119,7 @@ func _insort_hit(into: Array, elm: Dictionary) -> void:
 	var low := 0;
 	var high := into.size();
 	while low < high:
-		var mid: int = (low + high) / 2;
+		var mid := int(low + high) / 2;
 		if into[mid].get("dist_sq") < elm.get("dist_sq"):
 			low = mid + 1;
 		else:

@@ -79,6 +79,11 @@ AttackChains="*res://global/AttackChains.gd"
 HUD="*res://hud/HUD.tscn"
 Settings="*res://global/Settings.gd"
 
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+gdscript/warnings/integer_division=false
+
 [display]
 
 window/size/width=1600

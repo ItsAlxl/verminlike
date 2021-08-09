@@ -97,7 +97,7 @@ func _perf_transit() -> void: # Called in animation
 	get_tree().paused = true;
 	set_process(true);
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if transit_loader == null:
 		get_tree().paused = false;
 		set_process(false);

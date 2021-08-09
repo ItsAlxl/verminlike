@@ -12,7 +12,7 @@ export var untether := true;
 var players := [];
 
 func _ready() -> void:
-	for i in range(const_players):
+	for _i in range(const_players):
 		_add_player();
 
 func get_available_player() -> AudioStreamPlayer3D:

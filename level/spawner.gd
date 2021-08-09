@@ -43,5 +43,5 @@ func enable(en: bool) -> void:
 			$SpawnTime.stop();
 
 func _on_SpawnTime_timeout():
-	for i in range(spawn_per_timer):
+	for _i in range(spawn_per_timer):
 		spawn(false);

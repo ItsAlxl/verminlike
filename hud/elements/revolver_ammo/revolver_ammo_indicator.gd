@@ -9,7 +9,7 @@ func _upd_filled() -> void:
 
 func set_max(m: int) -> void:
 	var old_max := ammo_max;
-	ammo_max = max(1, m);
+	ammo_max = int(max(1, m));
 	if ammo_max != old_max:
 		for c in get_children():
 			remove_child(c);
@@ -26,7 +26,7 @@ func get_max() -> int:
 
 func set_now(n: int) -> void:
 	var old_now := ammo_now;
-	ammo_now = clamp(n, 0, ammo_max);
+	ammo_now = int(clamp(n, 0, ammo_max));
 	if ammo_now != old_now:
 		_upd_filled();
 
