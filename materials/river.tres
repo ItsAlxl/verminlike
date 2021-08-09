@@ -1,0 +1,40 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=43]
+code = "shader_type spatial;
+
+uniform vec4 water_clr : hint_color = vec4(0.2, 0.4, 1.0, 1.0);
+uniform float amt : hint_range(0.0, 2.0) = 0.5;
+uniform float timescale : hint_range(0.0, 5.0) = 0.1;
+
+float generateOffset(float x, float z, float a, float b, float time) {
+	float radX = ((mod(x + z * x * a, amt) / amt) + time * mod(x * 0.8 + z, 1.5)) * 6.28;
+	float radZ = ((mod(b * (z * x + x * z), amt) / amt) + time * 2.0 * mod(x, 2.0)) * 6.28;
+	
+	return 0.5 * amt * (sin(radZ) + cos(radX));
+}
+
+vec3 applyDistortion(vec3 vtx, float time) {
+	float xd = generateOffset(vtx.x, vtx.z, 0.2, 0.1, time);
+	float yd = generateOffset(vtx.x, vtx.z, 0.1, 0.3, time);
+	float zd = generateOffset(vtx.x, vtx.z, 0.15, 0.2, time);
+	return vtx + vec3(xd, yd, zd);
+}
+
+void vertex() {
+	VERTEX = applyDistortion(VERTEX, TIME * timescale);
+}
+
+void fragment() {
+	NORMAL = normalize(cross(dFdx(VERTEX), dFdy(VERTEX)));
+	METALLIC = 0.6;
+	SPECULAR = 0.5;
+	ROUGHNESS = 0.2;
+	ALBEDO = water_clr.xyz;
+}"
+
+[resource]
+shader = SubResource( 43 )
+shader_param/water_clr = Color( 0.2, 0.4, 1, 1 )
+shader_param/amt = 0.4
+shader_param/timescale = 0.1

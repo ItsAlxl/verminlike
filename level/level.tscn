@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=2]
+[gd_scene load_steps=96 format=2]
 
 [ext_resource path="res://level/level.gd" type="Script" id=1]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=2]
@@ -45,6 +45,9 @@
 [ext_resource path="res://materials/terrain/level_slot3_normal_roughness.packed_tex" type="Texture" id=43]
 [ext_resource path="res://level/Clearer.tscn" type="PackedScene" id=44]
 [ext_resource path="res://level/doodads/obelisk/obelisk.tscn" type="PackedScene" id=45]
+[ext_resource path="res://materials/river.tres" type="Material" id=46]
+[ext_resource path="res://level/doodads/buildings/smith.tscn" type="PackedScene" id=47]
+[ext_resource path="res://level/doodads/buildings/lumber.tscn" type="PackedScene" id=48]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -334,6 +337,36 @@ points = PoolVector3Array( -0.074141, 0.142237, 0.04488, -0.074141, 0.142237, 0.
 [sub_resource type="CylinderShape" id=41]
 radius = 8.74771
 height = 3.61587
+
+[sub_resource type="PlaneMesh" id=42]
+size = Vector2( 250, 100 )
+subdivide_width = 50
+subdivide_depth = 50
+
+[sub_resource type="PlaneMesh" id=43]
+size = Vector2( 200, 100 )
+subdivide_width = 50
+subdivide_depth = 50
+
+[sub_resource type="PlaneMesh" id=44]
+size = Vector2( 200, 20 )
+subdivide_width = 50
+subdivide_depth = 50
+
+[sub_resource type="PlaneMesh" id=45]
+size = Vector2( 130, 20 )
+subdivide_width = 50
+subdivide_depth = 50
+
+[sub_resource type="PlaneMesh" id=47]
+size = Vector2( 130, 40 )
+subdivide_width = 50
+subdivide_depth = 50
+
+[sub_resource type="PlaneMesh" id=46]
+size = Vector2( 130, 20 )
+subdivide_width = 50
+subdivide_depth = 50
 
 [node name="Level" type="Spatial"]
 script = ExtResource( 1 )
@@ -7221,6 +7254,9 @@ transform = Transform( 0.904053, 0, -0.427421, 0, 1, 0, 0.427421, 0, 0.904053, 6
 [node name="Barn4" parent="Doodads" instance=ExtResource( 33 )]
 transform = Transform( -0.554336, 0, -0.832293, 0, 1, 0, 0.832293, 0, -0.554336, 524.346, 0.729295, 556.497 )
 
+[node name="Barn5" parent="Doodads" instance=ExtResource( 33 )]
+transform = Transform( 0.949868, 0, -0.31265, 0, 1, 0, 0.31265, 0, 0.949868, 556.4, 11.8627, 605.065 )
+
 [node name="Inn" parent="Doodads" instance=ExtResource( 39 )]
 transform = Transform( 0.734547, 0, -0.678557, 0, 1, 0, 0.678557, 0, 0.734547, 603.361, 0.898832, 691.845 )
 
@@ -7233,9 +7269,60 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 421.242, 5.6444, 408.511 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.01757, 0 )
 shape = SubResource( 41 )
 
+[node name="HouseChimneyStilts2" parent="Doodads" instance=ExtResource( 38 )]
+transform = Transform( -0.978361, 0, 0.206905, 0, 1, 0, -0.206905, 0, -0.978361, 615.417, 11.7951, 560.569 )
+
+[node name="Lumber" parent="Doodads" instance=ExtResource( 48 )]
+transform = Transform( -0.943916, 0, -0.330185, 0, 1, 0, 0.330185, 0, -0.943916, 660.971, 1.16402, 702.211 )
+
+[node name="Smith" parent="Doodads" instance=ExtResource( 47 )]
+transform = Transform( -0.728479, 0, -0.685068, 0, 1, 0, 0.685068, 0, -0.728479, 629.896, 0.843041, 711.387 )
+
 [node name="EndLvlTimer" type="Timer" parent="."]
 wait_time = 2.5
 one_shot = true
+
+[node name="RiverMeshes" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="RiverMeshes"]
+transform = Transform( 0.681615, 0, -0.731711, 0, 1, 0, 0.731711, 0, 0.681615, 710.227, -35.0669, 76.7831 )
+mesh = SubResource( 42 )
+material/0 = ExtResource( 46 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="RiverMeshes"]
+transform = Transform( 0.98131, -0.115388, -0.154002, 0.113993, 0.993321, -0.0178895, 0.155038, 0, 0.987908, 920.061, -22.4124, 145.681 )
+mesh = SubResource( 43 )
+material/0 = ExtResource( 46 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="RiverMeshes"]
+transform = Transform( -0.17589, 0.0240846, -0.984115, 0.0919273, 0.995734, 0.00793882, 0.980108, -0.0890707, -0.177354, 796.333, -23.7767, 203.964 )
+mesh = SubResource( 44 )
+material/0 = ExtResource( 46 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="RiverMeshes"]
+transform = Transform( 0.499391, -0.0493204, -0.864971, 0.0490428, 0.998387, -0.0286129, 0.864987, -0.0281316, 0.501005, 811.83, -11.4914, 356.654 )
+mesh = SubResource( 44 )
+material/0 = ExtResource( 46 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="RiverMeshes"]
+transform = Transform( -4.37114e-08, 0, -1, -0.0350565, 0.999385, 1.53237e-09, 0.999385, 0.0350565, -4.36845e-08, 832.021, -7.59105, 448.224 )
+mesh = SubResource( 45 )
+material/0 = ExtResource( 46 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="RiverMeshes"]
+transform = Transform( 0.743707, 0.0777283, 0.663971, -0.0791164, 0.996471, -0.0280352, -0.663807, -0.031681, 0.747233, 781.354, -6.16207, 560.19 )
+mesh = SubResource( 47 )
+material/0 = ExtResource( 46 )
+
+[node name="MeshInstance7" type="MeshInstance" parent="RiverMeshes"]
+transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 685.881, -2.02335, 582.234 )
+mesh = SubResource( 45 )
+material/0 = ExtResource( 46 )
+
+[node name="MeshInstance8" type="MeshInstance" parent="RiverMeshes"]
+transform = Transform( 0.188084, 0, -0.982153, 0, 1, 0, 0.982153, 0, 0.188084, 635.929, -2.02335, 524.298 )
+mesh = SubResource( 46 )
+material/0 = ExtResource( 46 )
 
 [connection signal="body_entered" from="Doodads/Obelisk/EndArea" to="." method="_on_EndArea_body_entered"]
 [connection signal="timeout" from="EndLvlTimer" to="." method="_on_EndLvlTimer_timeout"]
