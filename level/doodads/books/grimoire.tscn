@@ -1,0 +1,14 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://materials/book_flesh.tres" type="Material" id=1]
+[ext_resource path="res://level/doodads/books/data/Book4_Closed.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://materials/metal_mechanism.tres" type="Material" id=3]
+[ext_resource path="res://materials/metal_red.tres" type="Material" id=4]
+[ext_resource path="res://materials/cloth.tres" type="Material" id=5]
+
+[node name="grimoire" type="MeshInstance"]
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 1 )
+material/1 = ExtResource( 5 )
+material/2 = ExtResource( 4 )
+material/3 = ExtResource( 3 )

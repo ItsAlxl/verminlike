@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Book3_Closed.obj-b27a024a724920d64adea3b70babad3f.mesh"
+
+[deps]
+
+files=[ "res://.import/Book3_Closed.obj-b27a024a724920d64adea3b70babad3f.mesh" ]
+
+source_file="res://level/doodads/books/data/Book3_Closed.obj"
+dest_files=[ "res://.import/Book3_Closed.obj-b27a024a724920d64adea3b70babad3f.mesh", "res://.import/Book3_Closed.obj-b27a024a724920d64adea3b70babad3f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
