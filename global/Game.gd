@@ -73,7 +73,7 @@ func get_lpc_combo_texture(chosen_opts := {}) -> Texture:
 	
 	for cat in LPC_ORDER:
 		if chosen_opts.has(cat):
-			if chosen_opts[cat] != null:
+			if chosen_opts[cat] != null && chosen_opts[cat] is Texture:
 				img.blend_rect(chosen_opts[cat].get_data(), Rect2(Vector2.ZERO, img.get_size()), Vector2.ZERO);
 	
 	var tex := ImageTexture.new();
@@ -103,7 +103,9 @@ func _check_lpc_req_queue(mutex: Mutex) -> void:
 			_perf_lpc_request(req);
 
 func _perf_lpc_request(req: Array) -> void:
-	req[0].call(req[1], get_lpc_combo_texture(req[2]));
+	var combo := get_lpc_combo_texture(req[2]);
+	if req[0] != null && req[0] is Node && req[0].is_inside_tree():
+		req[0].call(req[1], combo);
 
 func quit() -> void:
 	Settings.save();

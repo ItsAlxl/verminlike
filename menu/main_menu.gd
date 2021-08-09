@@ -1,6 +1,7 @@
 extends Control
 
 onready var RTLCredits := $Main/RTLCredits;
+var goto_level := "";
 
 func _ready():
 	HUD.enable(false);
@@ -65,18 +66,19 @@ func _on_RTLCredits_meta_clicked(meta):
 	OS.shell_open(meta);
 
 func _on_BtnPlay_pressed():
+	goto_level = "ATG";
 	show_equip_screen(true);
 
 func _on_BtnDbg_pressed():
-	_bake_equip();
-	HUD.change_scene("DBG");
+	goto_level = "DBG";
+	show_equip_screen(true);
 
 func _on_BtnQuit_pressed():
 	Game.quit();
 
 func _on_BtnGo_pressed():
 	_bake_equip();
-	HUD.change_scene("ATG");
+	HUD.change_scene(goto_level);
 
 func _on_BtnBack_pressed():
 	show_equip_screen(false);

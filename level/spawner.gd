@@ -3,7 +3,7 @@ extends Spatial
 export var on_timer := -1;
 export var spawn_per_timer := 1.0;
 export var dist_sq_to_plr := 500.0;
-export var spread := Vector2(0, 0);
+export var spread := Vector2(0.5, 0.5);
 export var initial := 0;
 export var start_aggro := false;
 

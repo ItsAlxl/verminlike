@@ -3,6 +3,8 @@ extends Unit
 
 const DESPAWN_DIST_SQ := pow(350.0, 2);
 const SLEEP_DIST_SQ := pow(100.0, 2);
+const NUM_WALLAVOID_RAYCASTS := 8;
+const WALLAVOID_RAYCAST_HALF_ARC := PI / NUM_WALLAVOID_RAYCASTS;
 
 var to_plr := Vector3.ZERO;
 var to_plr_norm := Vector3.ZERO;
@@ -74,9 +76,49 @@ func _physics_process(delta: float) -> void:
 		else:
 			roam_attention -= delta;
 			if roam_attention <= 0.0:
-				roam_attention = rand_range(2.0, 7.0);
-				roam_move = randf() > 0.3;
-				head.rotation.y += rand_range(-PI / 2, PI / 2);
+				var rot := get_wallavoid_raycast_random_angle(find_noncolliding_wallavoid_raycast());
+				if is_nan(rot):
+					roam_move = false;
+				else:
+					roam_attention = rand_range(2.0, 7.0);
+					roam_move = randf() > 0.3;
+					
+					head.rotation.y = rot;
+
+func find_noncolliding_wallavoid_raycast(start_at := -1) -> int:
+	if start_at < 0:
+		start_at = randi() % NUM_WALLAVOID_RAYCASTS;
+	
+	for i in range(NUM_WALLAVOID_RAYCASTS):
+		var idx := (start_at + i) % NUM_WALLAVOID_RAYCASTS;
+		if !$AvoidWalls.get_child(idx).is_colliding():
+			return idx;
+	return -1;
+
+func get_wallavoid_raycast_random_angle(rc_idx: int) -> float:
+	if rc_idx < 0:
+		return NAN;
+	
+	var left := -WALLAVOID_RAYCAST_HALF_ARC;
+	var right := WALLAVOID_RAYCAST_HALF_ARC;
+	if !$AvoidWalls.get_child(posmod(rc_idx + 1, NUM_WALLAVOID_RAYCASTS)).is_colliding():
+		right *= 2;
+	if !$AvoidWalls.get_child(posmod(rc_idx - 1, NUM_WALLAVOID_RAYCASTS)).is_colliding():
+		left *= 2;
+	
+	var ray: Vector3 = $AvoidWalls.get_child(rc_idx).cast_to;
+	return Vector2(ray.x, ray.z).angle() + rand_range(left, right);
+
+func get_nearest_wallavoid_raycast_to(angle: float) -> int:
+	var best_diff := INF;
+	var best_idx := -1;
+	for i in range(NUM_WALLAVOID_RAYCASTS):
+		var rc_cast: Vector3 = $AvoidWalls.get_child(i).cast_to;
+		var rc_angle_diff := posmod(angle - Vector2(rc_cast.x, rc_cast.z).angle(), TAU);
+		if rc_angle_diff < best_diff:
+			best_diff = rc_angle_diff;
+			best_idx = i;
+	return best_idx;
 
 func is_aggro_to_plr() -> bool:
 	return !sleeping && is_aggro && is_alive() && Game.plr.is_alive();
@@ -93,13 +135,21 @@ func spread_aggro() -> void:
 			if body.has_method("spread_aggro"):
 				body.spread_aggro();
 
-func get_unstunned_movt() -> Vector3:
+func get_naive_movt() -> Vector3:
 	if is_aggro_to_plr():
 		if dist_sq_to_plr > movt_dist_sq && !is_attacking:
 			return to_plr_norm;
 	elif roam_move:
 		return vector2_to_facing(Vector2(0, -1));
 	return Vector3.ZERO;
+
+func get_unstunned_movt() -> Vector3:
+	var movt := get_naive_movt();
+	if movt != Vector3.ZERO:
+		if $AvoidWalls.get_child(get_nearest_wallavoid_raycast_to(Vector2(movt.x, movt.z).angle())).is_colliding():
+			return Vector3.ZERO;
+	return movt;
+
 
 func _heavy_ready() -> void:
 	._heavy_ready();
