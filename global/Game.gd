@@ -1,5 +1,7 @@
 extends Node
 
+const ENABLE_LPC_REQUESTING := false;
+
 const MAX_LPC_THREADS := 5;
 const LPC_ORDER := ["shoes", "legs", "tops", "belts", "hats", "gloves"];
 const LPC_IMPORT_FLAGS := 0;
@@ -27,10 +29,11 @@ var level: Spatial;
 func _ready() -> void:
 	randomize();
 	
-	for _i in range(MAX_LPC_THREADS):
-		var t := Thread.new();
-		t.start(self, "_check_lpc_req_queue", _lpc_queue_mutex);
-		_lpc_threads.append(t);
+	if ENABLE_LPC_REQUESTING:
+		for _i in range(MAX_LPC_THREADS):
+			var t := Thread.new();
+			t.start(self, "_check_lpc_req_queue", _lpc_queue_mutex);
+			_lpc_threads.append(t);
 
 func get_random_wep_pscene() -> PackedScene:
 	var keys := wep_options.keys();
@@ -81,15 +84,16 @@ func get_lpc_combo_texture(chosen_opts := {}) -> Texture:
 	return tex;
 
 func request_lpc_combo(cb_obj: Object, cb_func: String, opts: Dictionary) -> void:
-	var deserial := {};
-	for k in opts:
-		if opts[k] is String:
-			deserial[k] = get_lpc_tex(k, opts[k]);
-		elif opts[k] == null || opts[k] is Texture:
-			deserial[k] = opts[k];
-		else:
-			print("ERROR: attempt an LPC request with non-string, non-texture vals");
-	_lpc_request_queue.append([cb_obj, cb_func, deserial]);
+	if ENABLE_LPC_REQUESTING:
+		var deserial := {};
+		for k in opts:
+			if opts[k] is String:
+				deserial[k] = get_lpc_tex(k, opts[k]);
+			elif opts[k] == null || opts[k] is Texture:
+				deserial[k] = opts[k];
+			else:
+				print("ERROR: attempt an LPC request with non-string, non-texture vals");
+		_lpc_request_queue.append([cb_obj, cb_func, deserial]);
 
 func _check_lpc_req_queue(mutex: Mutex) -> void:
 	while true:
